@@ -40,5 +40,42 @@ namespace frecevents.web.Models
         }
         return firstpart;
     }
+    public EventInfo ToData()
+    {
+        return new EventInfo()
+        {
+            ID = ID,
+            Title = Title,
+            StartDateTime = StartDateTime,
+            EndDateTime = EndDateTime,
+            EventSite = EventSite,
+            EventType = EventType,
+            SiteAddress = SiteAddress,
+            SiteURL = SiteURL,
+            Description = Description,
+            Notes = Notes,
+            MapURL = MapUrl
+
+        };
+    }
+    public static EventInfoModel FromData(EventInfo ei)
+    {
+        if (ei == null) return null;
+
+        return new EventInfoModel()
+                     {
+                         ID = ei.ID,
+                         Title = ei.Title,
+                         StartDateTime = ei.StartDateTime,
+                         EndDateTime = ei.EndDateTime,
+                         EventSite = ei.EventSite,
+                         EventType = ei.EventType,
+                         SiteAddress = ei.SiteAddress,
+                         SiteURL = ei.SiteURL,
+                         Description = ei.Description,
+                         Notes = ei.Notes,
+                         MapUrl = ei.MapURL
+                     };
+    }
   }
 }

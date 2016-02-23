@@ -35,12 +35,30 @@ namespace frecevents.web.Components
 
         public Models.EventInfoModel GetEvent(string ID)
         {
-            throw new NotImplementedException();
+            return EventInfoModel.FromData(Context.EventInfoes.Find(ID));
         }
 
         public void SaveEvent(Models.EventInfoModel Event)
         {
-            throw new NotImplementedException();
+            var ev = GetEvent(Event.ID);
+            if(ev==null)
+            {
+                try
+                {
+                    Context.EventInfoes.Add(Event.ToData());
+                    Context.SaveChanges();
+                }
+                catch(Exception ex)
+                {
+                    ex.ToString();
+                    throw;
+                }
+                return;
+            }
+
+            var original = Context.EventInfoes.Find(Event.ID);
+            Context.Entry(original).CurrentValues.SetValues(Event);
+            Context.SaveChanges();
         }
 
         public void DeleteEvent(string ID)

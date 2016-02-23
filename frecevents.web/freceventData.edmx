@@ -112,9 +112,9 @@ warning 6002: The table/view 'graysoft_frecevents.freceventsweb.Event' does not 
           <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EndDateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EventType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="EventSite" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EventSite" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
-          <Property Name="SiteURL" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SiteURL" Type="String" MaxLength="400" FixedLength="true" Unicode="true" />
           <Property Name="SiteAddress" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="MapURL" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="Notes" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />

@@ -47,6 +47,7 @@ namespace frecevents.web.Controllers
             {
                 if (Request["datatype"] == "events")
                 {
+                    model.DataType = "events";
                     model.Mapping = new Dictionary<string, string>()
                     {
                         { "ID", ""},
@@ -64,6 +65,7 @@ namespace frecevents.web.Controllers
                 }
                 if (Request["datatype"] == "riders")
                 {
+                    model.DataType = "riders";
                     model.Mapping = new Dictionary<string, string>()
                     {
                         { "ID", ""},
@@ -88,19 +90,22 @@ namespace frecevents.web.Controllers
                 }
                 else
                 {
+                    model.Headers = true;
                     model.Fields.AddRange(firstline.Split(separator));
                 }
             }
             if(Request["mappingdone"]!=null)
             {
-                foreach(var column in model.Mapping.Keys)
+                var columns = model.Mapping.Keys.ToArray<string>();
+                foreach (var column in columns)
                 {
-                    if(!String.IsNullOrWhiteSpace(Request[column]) && Request[column] != "Select...")
+                    if (!String.IsNullOrWhiteSpace(Request[column]) && Request[column] != "Select...")
                     {
                         model.Mapping[column] = Request[column];
                     }
                 }
                 var sr = new StringReader(model.Filedata);
+                sr.ReadLine();
                 while(1==1)
                 {
                     var dataline = sr.ReadLine();
@@ -109,8 +114,12 @@ namespace frecevents.web.Controllers
                     var separator = (dataline.Contains('\t')) ? new char[] { '\t' } : new char[] { ',' };
 
                     var data = dataline.Split(separator);
+                    for (var i = 0; i < data.Length;i++)
+                    {
+                        data[i] = data[i].Trim(' ', '"');
+                    }
 
-                    switch(model.DataType)
+                    switch (model.DataType)
                     {
                         case "events":
                             var ev = new EventInfoModel();
@@ -145,7 +154,11 @@ namespace frecevents.web.Controllers
             {
                 return null;
             }
-            var index = model.Fields.IndexOf(model.Mapping[key]);
+            if(String.IsNullOrWhiteSpace(model.Mapping[key]))
+            {
+                return null;
+            }
+            var index = model.Fields.IndexOf(model.Mapping[key]) - 1;
             if(index < 0)
             {
                 return null;
@@ -154,7 +167,7 @@ namespace frecevents.web.Controllers
             {
                 return null;
             }
-            return data[model.Fields.IndexOf(model.Mapping[key])];
+            return data[index];
         }
     }
 }
