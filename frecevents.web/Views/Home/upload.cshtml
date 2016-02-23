@@ -1,0 +1,61 @@
+﻿@model frecevents.web.Models.UploadSpec
+@using Microsoft.Web.Helpers;
+@{
+    ViewBag.Title = "Upload Data";
+    Layout = "~/Views/Shared/_layout.cshtml";
+    if(Model.Fields!=null)
+    {
+        Model.Fields.Insert(0, "Select...");
+    }
+}
+<div class="header_bar"></div>
+Upload File:
+
+@FileUpload.GetHtml(
+        initialNumberOfFiles: 1,
+        allowMoreFilesToBeAdded: false,
+        includeFormTag: true,
+        uploadText: "Upload")
+
+@using (Html.BeginForm())
+{
+    <div>
+        @if (Model.Fileuploaded)
+        {
+            <div>
+                <p>@Html.RadioButton("datatype", "events", isChecked: true) Events Data @Html.RadioButton("datatype", "riders") Rider Data</p>
+                <p>@Html.CheckBox("fieldnames", isChecked: true) First row contains field names</p>
+                <input type="submit" value="Set mapping" />
+            </div>
+        }
+
+        @if (Model.Mapping != null && Model.Mapping.Count > 0)
+        {
+            <div>
+                <p>
+    Column/Field Mapping:
+    <table>
+        <tr style="font-weight: bold">
+            <td style="width: 150px">Column</td>
+            <td>Field</td>
+        </tr>
+        @foreach (var column in Model.Mapping.Keys)
+        {
+            <tr>
+                <td>@column</td>
+                <td>@Html.DropDownList(column, new SelectList(Model.Fields))</td>
+            </tr>
+        }
+        </table>
+            </p>
+                <input type="submit" value="Go" />
+                <input type="hidden" name="mappingdone" value="yes" />
+            </div>
+        }
+    </div>
+}
+
+<div style="background: #333">
+    <br />
+    <br />
+</div>

@@ -1,0 +1,35 @@
+/* UItoTop styles
+========================================================*/
+#toTop {
+  display: none;
+  text-decoration: none;
+  position: fixed;
+  bottom: 80px;
+  right: 30px;
+  overflow: hidden;
+  background: #dad6c8;
+  border-radius: 50%;
+  height: 46px;
+  width: 37px;
+  color: #fff;
+  z-index: 20;
+  -moz-transition: color 0.5s ease;
+  -o-transition: color 0.5s ease;
+  -webkit-transition: color 0.5s ease;
+  transition: color 0.5s ease;
+}
+#toTop:before {
+  content: "\f106";
+  font: 400 38px/41px "FontAwesome";
+  padding-left: 6px;
+}
+#toTop:hover {
+  outline: none;
+  color: #fff;
+  background: #cfb463;
+}
+@media only screen and (max-width: 1199px) {
+  #toTop {
+    display: none !important;
+  }
+}

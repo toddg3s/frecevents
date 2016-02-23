@@ -1,0 +1,43 @@
+StartDate	EndDate	Show	Venue	Information	
+2/6/2016	2/6/2016	Donida Schooling Show - English	"Donida Farm EC- Auburn, WA"	www.donidafarm.com	
+2/13/2016	2/13/2016	Donida Schooling Show - Dressage	"Donida Farm EC - Auburn, WA"	www.donidafarm.com	
+2/14/2016	2/14/2016	Jumperday	"Freedom Run Equestrian Center - Kent, WA"	freedomrunec@gmail.com	
+2/14/2016	2/14/2016	Leslie Law Clinic - Audit Opportunity			
+2/20/2016	2/20/2016	Jumpernite	"Donida Farm EC - Auburn, WA"	www.donidafarm.com	
+2/21/2016	2/21/2016	Clinic	"Freedom Run Equestrian Center - Kent, WA"	freedomrunec@gmail.com	
+3/5/2016	3/5/2016	Donida Schooling Show - English	"Donia Farm EC - Auburn, WA"	www.donidafarm.com	
+3/12/2016	3/12/2016	Aspen Farms Derby	"Aspen Farms - Yelm, WA"	www.aspenfarmseventing.com	
+3/18/2016	3/20/2016	Philip Clinic			
+4/2/2016	4/2/2016	Donida Schooling Show - Dressage	"Donida Farm EC - Auburn, WA"	www.donida.com	
+4/9/2016	4/9/2016	Donida Schooling Show - English	"Donida Farm EC - Auburn, WA"	www.donida.com	
+4/8/2016	4/10/2016	Tulip Springs Clinic		freedomrunec@gmail.com	
+4/23/2016	4/23/2016	Aspen Farms Derby	"Aspen Farms - Yelm, WA"	www.aspenfarmseventing.com	
+5/7/2016	5/8/2016	Spring Dressage Show	"Whidbey Equestrian Center - Coupeville, WA"	www.ridewec.com	
+5/14/2016	5/14/2016	Aspen Farms Derby	"Aspen Farms - Yelm, WA"	www.aspenfarmseventing.com	
+5/20/2016	5/22/2016	Spokane Sport Horse Spring Horse Trials	"Spokane Sport Horse Farms - Spokane, WA"	www.spokanesporthorse.com	
+5/27/2016	5/29/2016	Equestrians Institute Horse Trials	"Washington State Horse Park - Cle Elum, WA"	www.equestriansinstitute.org	
+6/4/2016	6/5/2016	Schooling Rainbow			
+6/10/2016	6/12/2016	Aspen Farms Horse Trials	"Aspen Farms - Yelm, WA"		
+6/15/2016	6/19/2016	Swiftwater Invitational	Washington State Horse Park - Cle Elum	www.cascadehorseshows.com	
+6/24/2016	6/26/2016	Inavale Farm Horse Trials	"Inavale Farm - Philomath, OR"	www.inavalefarm.com	
+7/6/2016	7/10/2016	Country Classic Preview	"Hunter Creek Equestrian Park - Wilsonville, OR"	www.teamnwequestriansports.com	
+7/8/2016	7/10/2016	40th Annual Whidbey Island Horse Trials	"Oak Harbor, WA"	www.whidbeyhorsetrials.org	
+7/16/2016	7/16/2016	Donida Farm Wine & Roses Dressage-Wine	"Donida Farm EC - Auburn, WA"	www.donida.com	
+7/17/2016	7/17/2016	Donida Farm Wine & Roses Dressage-Roses	"Donida Farm EC - Auburn, WA"	www.donida.com	
+7/21/2016	7/24/2016	The Event at Rebecca Farm - Horse Trials	"Rebecca Farm - Kalispell, MT"	www.rebeccafarm.org	
+7/29/2016	7/29/2016	Donida Farm Dressage Festival #1	"Donida Farm EC - Auburn, WA"	www.donida.com	
+7/30/2016	7/31/2016	Donida Farm Dressage Festival #2	"Donida Farm EC- Auburn, WA"	www.donida.com	
+8/3/2016	8/7/2016	Cascade Classic	"Washington State Horse Park - Cle Elum, WA"	www.cascadehorseshows.com	
+8/13/2016	8/14/2016	Young Riders Benefit Horse Trials	"Lincoln Creek - Chehalis, WA"	www.areavii.org/YR.index.htm	
+8/26/2016	8/28/2016	Caber Horse Trials	"Caber Farm - Onalaska, WA"	www.caberfarm.com	
+9/9/2016	9/11/2016	Aspen Farms Horse Trial Championships	"Aspen Farms - Yelm, WA"	www.aspenfarmseventing.com	
+9/14/2016	9/18/2016	Northwest Autumn Classic	"Evergreen Equestrian Park - Monroe, WA"	www.wshja.org	
+9/22/2016	9/25/2016	Region 6 Dressasge Championships	"Donida Farm EC  - Auburn, WA"	www.usdfregion6.org	
+9/24/2016	9/25/2016	Equestrians Institute Horse Trials II	"Washington State Horse Park - Cle Elum, WA"	www.equestriansinstitute.org	
+10/7/2016	10/9/2016	Woodside International Horse Trials	"The Park at Woodside - Woodside, CA"	www.WoodsideEventing.com	
+10/8/2016	10/9/2016	Spokane Sport Horse Farm Fall Horse Trials	"Spokane Sport Horse Farms - Spokane, WA"	www.spokanesporthorse.com	
+10/12/2016	10/16/2016	October Classic	"Evergreen Equestrian Park - Monroe, WA"	www.wshja.org	
+10/21/2016	10/23/2016	Fresno County Horse Park Horse Trials	"Fresno County Horse Park - Fresno, CA"	www.useventing.com	
+11/3/2016	11/6/2016	Galway Downs International Event & HT	"Galway Downs - Temecula, CA"	www.galwaydowns.com	
+					
+					

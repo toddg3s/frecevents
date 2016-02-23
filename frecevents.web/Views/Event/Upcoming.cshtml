@@ -1,0 +1,28 @@
+﻿@using frecevents.web.Models
+@model frecevents.web.Models.ModelBase
+
+@{
+    ViewBag.Title = "Upcoming Events";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+<h2>Upcoming Events</h2>
+
+<table class="table">
+    <tr>
+        <th>Date</th><th>Event</th>
+    </tr>
+
+@foreach (var e in Model.UpcomingEvents) {
+    <tr>
+        <td>@Html.Label(e.FormatDateRange(Event.DateFormat.Normal))</td>
+        <td>@Html.ActionLink(e.Title, "Show", new { e.ID })</td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {/* id=item.PrimaryKey */}) |
+            @Html.ActionLink("Details", "Details", new {/* id=item.PrimaryKey */}) |
+            @Html.ActionLink("Delete", "Delete", new {/* id=item.PrimaryKey */})
+        </td>
+    </tr>
+}
+
+</table>

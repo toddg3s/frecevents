@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="freceventsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EventInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="StartDateTime" Type="datetime" Nullable="false" />
+          <Property Name="EndDateTime" Type="datetime" Nullable="false" />
+          <Property Name="EventType" Type="varchar" MaxLength="50" />
+          <Property Name="EventSite" Type="varchar" MaxLength="100" />
+          <Property Name="Description" Type="varchar" MaxLength="4000" />
+          <Property Name="SiteURL" Type="nchar" MaxLength="10" />
+          <Property Name="SiteAddress" Type="varchar" MaxLength="300" />
+          <Property Name="MapURL" Type="varchar" MaxLength="300" />
+          <Property Name="Notes" Type="varchar" MaxLength="4000" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="eventID" />
+            <PropertyRef Name="RiderID" />
+          </Key>
+          <Property Name="eventID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RiderID" Type="int" Nullable="false" />
+          <Property Name="Notes" Type="varchar" MaxLength="4000" />
+        </EntityType>
+        <EntityType Name="Rider">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="300" />
+          <Property Name="Email" Type="varchar" MaxLength="300" />
+          <Property Name="Notes" Type="varchar" MaxLength="4000" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'graysoft_frecevents.freceventsweb.Event' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="StartDateTime" />
+            <PropertyRef Name="EndDateTime" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="StartDateTime" Type="datetime" Nullable="false" />
+          <Property Name="EndDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Registration_Event">
+          <End Role="EventInfo" Type="Self.EventInfo" Multiplicity="1" />
+          <End Role="Registration" Type="Self.Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EventInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Registration">
+              <PropertyRef Name="eventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registration_Rider">
+          <End Role="Rider" Type="Self.Rider" Multiplicity="1" />
+          <End Role="Registration" Type="Self.Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rider">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Registration">
+              <PropertyRef Name="RiderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="freceventsModelStoreContainer">
+          <EntitySet Name="EventInfo" EntityType="Self.EventInfo" Schema="freceventsweb" store:Type="Tables" />
+          <EntitySet Name="Registration" EntityType="Self.Registration" Schema="freceventsweb" store:Type="Tables" />
+          <EntitySet Name="Rider" EntityType="Self.Rider" Schema="freceventsweb" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Self.Event" store:Type="Views" store:Schema="freceventsweb">
+            <DefiningQuery>SELECT 
+    [Event].[ID] AS [ID], 
+    [Event].[Title] AS [Title], 
+    [Event].[StartDateTime] AS [StartDateTime], 
+    [Event].[EndDateTime] AS [EndDateTime]
+    FROM [freceventsweb].[Event] AS [Event]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Registration_Event" Association="Self.FK_Registration_Event">
+            <End Role="EventInfo" EntitySet="EventInfo" />
+            <End Role="Registration" EntitySet="Registration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registration_Rider" Association="Self.FK_Registration_Rider">
+            <End Role="Rider" EntitySet="Rider" />
+            <End Role="Registration" EntitySet="Registration" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="freceventsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="EventInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EventType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EventSite" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="SiteURL" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SiteAddress" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="MapURL" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Registrations" Relationship="Self.FK_Registration_Event" FromRole="EventInfo" ToRole="Registration" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="eventID" />
+            <PropertyRef Name="RiderID" />
+          </Key>
+          <Property Name="eventID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RiderID" Type="Int32" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EventInfo" Relationship="Self.FK_Registration_Event" FromRole="Registration" ToRole="EventInfo" />
+          <NavigationProperty Name="Rider" Relationship="Self.FK_Registration_Rider" FromRole="Registration" ToRole="Rider" />
+        </EntityType>
+        <EntityType Name="Rider">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Registrations" Relationship="Self.FK_Registration_Rider" FromRole="Rider" ToRole="Registration" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Title" />
+            <PropertyRef Name="StartDateTime" />
+            <PropertyRef Name="EndDateTime" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDateTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK_Registration_Event">
+          <End Role="EventInfo" Type="Self.EventInfo" Multiplicity="1" />
+          <End Role="Registration" Type="Self.Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EventInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Registration">
+              <PropertyRef Name="eventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registration_Rider">
+          <End Role="Rider" Type="Self.Rider" Multiplicity="1" />
+          <End Role="Registration" Type="Self.Registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rider">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Registration">
+              <PropertyRef Name="RiderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="freceventsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EventInfoes" EntityType="Self.EventInfo" />
+          <EntitySet Name="Registrations" EntityType="Self.Registration" />
+          <EntitySet Name="Riders" EntityType="Self.Rider" />
+          <EntitySet Name="Events" EntityType="Self.Event" />
+          <AssociationSet Name="FK_Registration_Event" Association="Self.FK_Registration_Event">
+            <End Role="EventInfo" EntitySet="EventInfoes" />
+            <End Role="Registration" EntitySet="Registrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registration_Rider" Association="Self.FK_Registration_Rider">
+            <End Role="Rider" EntitySet="Riders" />
+            <End Role="Registration" EntitySet="Registrations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="freceventsModelStoreContainer" CdmEntityContainer="freceventsEntities">
+          <EntitySetMapping Name="EventInfoes">
+            <EntityTypeMapping TypeName="freceventsModel.EventInfo">
+              <MappingFragment StoreEntitySet="EventInfo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
+                <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
+                <ScalarProperty Name="EventType" ColumnName="EventType" />
+                <ScalarProperty Name="EventSite" ColumnName="EventSite" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SiteURL" ColumnName="SiteURL" />
+                <ScalarProperty Name="SiteAddress" ColumnName="SiteAddress" />
+                <ScalarProperty Name="MapURL" ColumnName="MapURL" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registrations">
+            <EntityTypeMapping TypeName="freceventsModel.Registration">
+              <MappingFragment StoreEntitySet="Registration">
+                <ScalarProperty Name="eventID" ColumnName="eventID" />
+                <ScalarProperty Name="RiderID" ColumnName="RiderID" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Riders">
+            <EntityTypeMapping TypeName="freceventsModel.Rider">
+              <MappingFragment StoreEntitySet="Rider">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="freceventsModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
+                <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

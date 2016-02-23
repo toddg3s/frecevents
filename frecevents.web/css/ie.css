@@ -1,0 +1,9 @@
+
+.class { behavior:url(/js/PIE.htc); position:absolute;}
+
+.lt-ie9 .stuck_container .bg {
+  background: none;
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#80001219', endColorstr='#80001219')";
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80001219', endColorstr='#80001219');
+  zoom: 1;
+}

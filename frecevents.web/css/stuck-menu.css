@@ -1,0 +1,12 @@
+/* Stuck menu styles
+========================================================*/
+.isStuck {
+  background: none repeat scroll 0 0 #150c07;
+  padding: 5px 0 12px;
+  z-index: 999;
+}
+@media only screen and (max-width: 979px) {
+  .isStuck {
+    display: none !important;
+  }
+}

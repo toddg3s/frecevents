@@ -1,0 +1,30 @@
+/* Stellar(parallaxBG) styles
+========================================================*/
+.stellar-block {
+  background-attachment: fixed;
+  background-position: center 0%;
+  position: relative;
+  background-repeat: no-repeat;
+  padding-bottom: 100px;
+  z-index: 8;
+}
+.first {
+  background-image: url(../images/bg_pic2.jpg);
+  background-color: #fff;
+  background-position: 50% 100%;
+}
+.second {
+  background-image: url(../images/slide.jpg);
+  background-color: #fff;
+}
+@media only screen and (max-width: 979px) {
+  .stellar-block {
+    background-attachment: scroll;
+    background-position: 50% 50%;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    padding-bottom: 100px;
+    z-index: 8;
+  }
+}
