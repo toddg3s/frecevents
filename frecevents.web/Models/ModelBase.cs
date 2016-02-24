@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
@@ -11,11 +12,13 @@ namespace frecevents.web.Models
   {
     public List<EventGroupModel> PastEvents { get; set; }
     public List<EventModel> UpcomingEvents { get; set; }
+    public List<EventModel> TopUpcomingEvents { get; set; }
 
     public ModelBase()
     {
       PastEvents = new List<EventGroupModel>();
       UpcomingEvents = new List<EventModel>();
+      TopUpcomingEvents = new List<EventModel>();
     }
 
     public virtual void Initialize()
@@ -24,6 +27,9 @@ namespace frecevents.web.Models
       PastEvents.Clear();
       var currgroup = new EventGroupModel();
       UpcomingEvents.Clear();
+      var count = Int32.Parse(ConfigurationManager.AppSettings["TopUpcomingCount"] ?? "6");
+      var index = 0;
+
       foreach (var e in elist.OrderBy(se => se.StartDateTime))
       {
         if (e.StartDateTime.Date < DateTime.Now.Date)
@@ -41,6 +47,10 @@ namespace frecevents.web.Models
         else
         {
           UpcomingEvents.Add(e);
+          if (index++ < count)
+          {
+            TopUpcomingEvents.Add(e);
+          }
         }
       }
       if (currgroup.Name != null)

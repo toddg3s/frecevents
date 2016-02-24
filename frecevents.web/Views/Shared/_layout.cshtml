@@ -48,7 +48,7 @@
                         <li class="current">@Html.ActionLink("Home", "index", "Home")</li>
                         <li>@Html.ActionLink("Upcoming Events", "upcoming", "Event")
                             <ul>
-                                @foreach (EventModel e in Model.UpcomingEvents)
+                                @foreach (EventModel e in Model.TopUpcomingEvents)
                                 {
                                     <li>@Html.ActionLink(e.FormatDateRange(EventModel.DateFormat.StartShort) + ": " + e.Title, "show", "Event")</li>
                                 }
