@@ -21,6 +21,20 @@ namespace frecevents.web.Models
       TopUpcomingEvents = new List<EventModel>();
     }
 
+    private static ModelBase s_default;
+    public static ModelBase Default
+    {
+      get
+      {
+        if(s_default==null)
+        {
+          s_default = new ModelBase();
+          s_default.Initialize();
+        }
+        return s_default;
+      }
+    }
+
     public virtual void Initialize()
     {
       var elist = GetEvents();

@@ -1,19 +1,61 @@
-﻿@model frecevents.web.Models.EventInfo
+﻿@model frecevents.web.Models.EventInfoModel
 
 @{
-    ViewBag.Title = "Show";
+    ViewBag.Title = Model.Title + " - Freedom Run";
     Layout = "~/Views/Shared/_layout.cshtml";
 }
+<div class="header_bar"></div>
 
-<h2>Show</h2>
+<div class="bg-secondary2 bg-pl">
+    <div class="container cont-1">
+        <div class="row">
+            <div class="grid_12 wow fadeInUp" data-wow-delay="0.2s">
+                <h3 class='well center h-cont'>@Model.Title</h3>
+            </div><!--/grid-->
+            <div class="grid_6 wow fadeInLeft bg-secondary1" data-wow-delay="0.4s">
+                <div class="grid_1 box-cont1 mrg0">
+                    <img src="~/images/cal_icon.png" />
+                </div>
+                <div class="grid_5 bg-secondary1">
+                    <h4 class="center">@Model.FormatDateRange(frecevents.web.Models.EventModel.DateFormat.Normal)</h4>
+                </div>
+            </div>
+            <div class="grid_6 wow fadeInRight bg-secondary1" data-wow-delay="0.4s">
+                <div class="grid_1 box-cont1 mrg0">
+                    <img src="~/images/location_icon.png" />
+                </div>
+                <div class="grid_5 bg-secondary1">
+                    <h4 class="center">@Model.EventSite</h4>
+                    @if (!String.IsNullOrWhiteSpace(Model.SiteURL))
+                    {
+                        <p class="icon-box-cont"><a href="http://@Model.SiteURL" target="_blank">@Model.SiteURL</a></p>
+                    }
+                    @if (!String.IsNullOrWhiteSpace(Model.MapUrl))
+                    {
+                        <div>
+                            <iframe src="@Model.MapUrl" width="300" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+                        </div>
 
-<div>
-    <h4>EventInfo</h4>
-    <hr />
-    <dl class="dl-horizontal">
-    </dl>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="bg-secondary1 bg-pl">
+    <div class="container cont-1">
+        <div class="row">
+            <div class="grid_1 wow fadeInUp" data-wow-delay="0.2s">
+                <img src="~/images/info_icon.png" />
+            </div><!--/grid-->
+            <div class="grid_11 wow fadeInDown" data-wow-delay="0.4s">
+                @Model.Description
+            </div>
+        </div>
+    </div>
+</div>
+
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>

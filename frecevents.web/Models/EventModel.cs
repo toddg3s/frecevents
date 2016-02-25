@@ -6,7 +6,7 @@ using System.Web;
 
 namespace frecevents.web.Models
 {
-  public class EventModel
+  public class EventModel : ModelBase
   {
     public string ID { get; set; }
     public string Title { get; set; }
@@ -41,25 +41,69 @@ namespace frecevents.web.Models
           }
           else
           {
-            return EndDateTime.ToString("MMM d yyyy");
+            return EndDateTime.ToString("MMM d, yyyy");
+          }
+        case DateFormat.StartLong:
+          if (StartDateTime.Year == DateTime.Now.Year)
+          {
+            return StartDateTime.ToString("ddd, MMMM d");
+          }
+          else
+          {
+            return StartDateTime.ToString("ddd, MMMM d, yyyy");
+          }
+        case DateFormat.EndLong:
+          if (EndDateTime == DateTime.MinValue)
+          {
+            return "";
+          }
+          if (EndDateTime.Year == DateTime.Now.Year)
+          {
+            return EndDateTime.ToString("ddd, MMMM d");
+          }
+          else
+          {
+            return EndDateTime.ToString("ddd, MMMM d, yyyy");
+          }
+        case DateFormat.StartFull:
+          if (StartDateTime.Year == DateTime.Now.Year)
+          {
+            return StartDateTime.ToString("dddd, MMMM d");
+          }
+          else
+          {
+            return StartDateTime.ToString("dddd, MMMM d, yyyy");
+          }
+        case DateFormat.EndFull:
+          if (EndDateTime == DateTime.MinValue)
+          {
+            return "";
+          }
+          if (EndDateTime.Year == DateTime.Now.Year)
+          {
+            return EndDateTime.ToString("dddd, MMMM d");
+          }
+          else
+          {
+            return EndDateTime.ToString("dddd, MMMM d, yyyy");
           }
         default:
           var sb = new StringBuilder();
-          sb.Append(FormatDateRange(DateFormat.StartShort));
+          sb.Append(FormatDateRange(DateFormat.StartLong));
           if (StartDateTime.Hour > 0)
           {
             sb.Append(StartDateTime.ToString(" h:mm tt"));
           }
-          if (EndDateTime > DateTime.MinValue)
+          if (EndDateTime > DateTime.MinValue  && EndDateTime != StartDateTime)
           {
             sb.Append(" - ");
             if (EndDateTime.Date != StartDateTime.Date)
             {
-              sb.Append(FormatDateRange(DateFormat.EndShort));
-              if (EndDateTime.Hour > 0)
-              {
-                sb.Append(EndDateTime.ToString(" h:mm tt"));
-              }
+              sb.Append(FormatDateRange(DateFormat.EndLong));
+            }
+            if (EndDateTime.Hour > 0)
+            {
+              sb.Append(EndDateTime.ToString(" h:mm tt"));
             }
           }
           return sb.ToString();
@@ -70,7 +114,11 @@ namespace frecevents.web.Models
     {
       StartShort,
       Normal,
-      EndShort
+      EndShort,
+      StartLong,
+      EndLong,
+      StartFull,
+      EndFull
     }
   }
 }

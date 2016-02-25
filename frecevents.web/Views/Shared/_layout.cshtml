@@ -50,7 +50,7 @@
                             <ul>
                                 @foreach (EventModel e in Model.TopUpcomingEvents)
                                 {
-                                    <li>@Html.ActionLink(e.FormatDateRange(EventModel.DateFormat.StartShort) + ": " + e.Title, "show", "Event")</li>
+                                    <li>@Html.ActionLink(e.FormatDateRange(EventModel.DateFormat.StartShort) + ": " + e.Title, e.ID, "Event")</li>
                                 }
                             </ul>
                         </li>
@@ -63,7 +63,7 @@
                                         <ul>
                                             @foreach (EventModel e in eg.Events)
                                             {
-                                                <li>@Html.ActionLink(e.Title, "info", "Event")</li>
+                                                <li>@Html.ActionLink(e.Title, e.ID, "Event")</li>
                                             }
                                         </ul>
                                     </li>
@@ -88,6 +88,11 @@
     <!--========================================================
                                                         FOOTER
     =========================================================-->
+    <div style="background: #333">
+        <br />
+        <br />
+    </div>
+
     <div class="grid_12 center">
         <div class="privacy">
             Copyright © 2016 | <a class="btn-prp" href="index-5.html">Privacy Policy</a>

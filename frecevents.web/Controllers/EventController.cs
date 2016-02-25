@@ -10,9 +10,15 @@ namespace frecevents.web.Controllers
     public class EventController : Controller
     {
         // GET: Event
-        public ActionResult Show(string ID)
+        public ActionResult Show(string id)
         {
-            return View();
+          var ei = Root.Data.GetEvent(id);
+          if(ei==null)
+          {
+              return View("EventNotFound",ModelBase.Default);
+          }
+          ei.Initialize();
+          return View(ei);
         }
 
       public ActionResult Upcoming()
