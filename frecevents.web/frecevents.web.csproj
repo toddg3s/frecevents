@@ -225,6 +225,7 @@
     <Content Include="images\page-4_img09.jpg" />
     <Content Include="images\page-5_ico-1.png" />
     <Content Include="images\page-6_ico-1.png" />
+    <Content Include="images\register_icon.png" />
     <Content Include="images\results_icon.png" />
     <Content Include="images\riders_icon.png" />
     <Content Include="js\camera.js" />

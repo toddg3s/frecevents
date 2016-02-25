@@ -1034,6 +1034,31 @@ nav {
   display: block;
 }
 /*========================================================
+                    Markdown styles
+=================================================== ======*/
+.markdown {
+
+}
+
+.markdown em {
+    font-style: italic;
+}
+
+.markdown strong {
+    font-weight: bold;
+}
+
+.markdown ul {
+    list-style: circle;
+    list-style-position: hanging;
+    margin-left: 30px;
+}
+
+.markdown ol {
+   list-style-type: decimal;
+   margin-left: 30px;
+}
+/*========================================================
                     FOOTER styles
 =================================================== ======*/
 #footer {

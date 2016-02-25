@@ -50,7 +50,7 @@
                             <ul>
                                 @foreach (EventModel e in Model.TopUpcomingEvents)
                                 {
-                                    <li>@Html.ActionLink(e.FormatDateRange(EventModel.DateFormat.StartShort) + ": " + e.Title, e.ID, "Event")</li>
+                                    <li>@Html.ActionLink(e.FormatDateRange(EventModel.DateFormat.StartShort) + ": " + e.Title, "", e.ID)</li>
                                 }
                             </ul>
                         </li>
@@ -63,7 +63,7 @@
                                         <ul>
                                             @foreach (EventModel e in eg.Events)
                                             {
-                                                <li>@Html.ActionLink(e.Title, e.ID, "Event")</li>
+                                                <li>@Html.ActionLink(e.Title,"", e.ID)</li>
                                             }
                                         </ul>
                                     </li>

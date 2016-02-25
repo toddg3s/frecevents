@@ -16,6 +16,19 @@ namespace frecevents.web.Models
     public string MapUrl { get; set; }
     public string Notes { get; set; }
 
+    private string _deschtml = "";
+    public string DescriptionHTML
+    {
+      get
+      {
+        
+        if (String.IsNullOrWhiteSpace(Description)) return "";
+        if (!String.IsNullOrEmpty(_deschtml)) return _deschtml;
+        _deschtml = CommonMark.CommonMarkConverter.Convert(Description);
+        return _deschtml;
+      }
+    }
+
     internal string GenerateID()
     {
         var sb = new StringBuilder();
