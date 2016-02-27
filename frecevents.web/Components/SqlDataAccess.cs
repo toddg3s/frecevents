@@ -75,5 +75,48 @@ namespace frecevents.web.Components
         {
             throw new NotImplementedException();
         }
+
+
+        public RiderModel GetRider(int ID)
+        {
+          return RiderModel.FromData(Context.Riders.Find(ID));
+        }
+
+        public RiderModel FindRider(string Name, string Email)
+        {
+          RiderModel rider = null;
+          if (!String.IsNullOrWhiteSpace(Name))
+          {
+            var riders = from r in Context.Riders where r.Name.IsEqual(Name) select r;
+            rider = RiderModel.FromData(riders.FirstOrDefault());
+          }
+          if (rider == null && !String.IsNullOrWhiteSpace(Email))
+          {
+            var ridersbyemail = from r in Context.Riders where r.Email.IsEqual(Email) select r;
+            rider = RiderModel.FromData(ridersbyemail.FirstOrDefault());
+          }
+          return rider;
+        }
+
+        public void SaveRider(RiderModel Rider)
+        {
+          if (Rider.ID > 0)
+          {
+            var original = Context.Riders.Find(Rider.ID);
+            Context.Entry(original).CurrentValues.SetValues(Rider);
+            Context.SaveChanges();
+            return;
+          }
+          var foundrider = FindRider(Rider.Name, Rider.Email);
+          if (foundrider != null)
+          {
+            Rider.ID = foundrider.ID;
+            SaveRider(Rider);
+          }
+          var datarider = Rider.ToData();
+          Context.Riders.Add(datarider);
+          Context.SaveChanges();
+          Rider.ID = datarider.ID;
+        }
     }
 }
