@@ -13,12 +13,14 @@ namespace frecevents.web.Models
     public List<EventGroupModel> PastEvents { get; set; }
     public List<EventModel> UpcomingEvents { get; set; }
     public List<EventModel> TopUpcomingEvents { get; set; }
+    public List<EventModel> AllEvents { get; set; } 
 
     public ModelBase()
     {
       PastEvents = new List<EventGroupModel>();
       UpcomingEvents = new List<EventModel>();
       TopUpcomingEvents = new List<EventModel>();
+      AllEvents = new List<EventModel>();
     }
 
     private static ModelBase s_default;
@@ -43,7 +45,8 @@ namespace frecevents.web.Models
       UpcomingEvents.Clear();
       var count = Int32.Parse(ConfigurationManager.AppSettings["TopUpcomingCount"] ?? "6");
       var index = 0;
-
+      AllEvents.Clear();
+      AllEvents.AddRange(elist);
       foreach (var e in elist.OrderBy(se => se.StartDateTime))
       {
         if (e.StartDateTime.Date < DateTime.Now.Date)

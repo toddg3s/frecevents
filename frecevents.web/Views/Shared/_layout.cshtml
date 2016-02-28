@@ -46,7 +46,7 @@
                 <nav class='nav'>
                     <ul class="sf-menu">
                         <li class="current">@Html.ActionLink("Home", "index", "Home")</li>
-                        <li>@Html.ActionLink("Upcoming Events", "upcoming", "Event")
+                        <li>@Html.ActionLink("Upcoming Events", "List", "Event", new { type="upcoming" })
                             <ul>
                                 @foreach (EventModel e in Model.TopUpcomingEvents)
                                 {
@@ -55,7 +55,7 @@
                             </ul>
                         </li>
                         <li>
-                            @Html.ActionLink("Past Events", "past", "Event")
+                            @Html.ActionLink("Past Events", "List", "Event", new {type="past"})
                             <ul>
                                 @foreach (EventGroupModel eg in Model.PastEvents)
                                 {

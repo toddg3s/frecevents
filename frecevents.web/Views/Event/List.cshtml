@@ -1,0 +1,37 @@
+﻿@using frecevents.web.Models
+@model IEnumerable<frecevents.web.Models.EventModel>
+
+@{
+    ViewBag.Title = "Event List";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+<div class="header-parall" data-stellar-background-ratio="0.8">
+</div>
+<div style="display: block; height: 60px"></div>
+
+<table class="table">
+    <tr>
+        <th>
+            Date
+        </th>
+        <th>
+            Event
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FormatDateRange(EventModel.DateFormat.Normal))
+        </td>
+        <td>
+            @Html.ActionLink(item.Title, "", item.ID)
+        </td>
+    </tr>
+}
+
+</table>
+<p>
+    @Html.ActionLink("Create New", "Edit")
+</p>

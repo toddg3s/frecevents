@@ -8,5 +8,8 @@ namespace frecevents.web.Models
 {
     public class RegistrationModel : ModelBase
     {
+      public string EventID { get; set; }
+      public int RiderID { get; set; }
+      public int TrailerSpace { get; set; }
     }
 }

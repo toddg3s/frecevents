@@ -28,7 +28,14 @@
                         <img src="~/images/register_icon.png" />
                     </div>
                     <div class="grid_4 bg-secondary1">
-                        <h4 class="center">You are NOT registered for this event</h4>
+                        @if (Root.Login == null)
+                        {
+                            <h4>Not logged in</h4>
+                        }
+                        else
+                        {
+                            <h4>Logged in</h4>
+                        }
                     </div>
                 </div>
                 <div class="grid_5 bg-secondary2" data-wow-delay="0.4s">&nbsp;</div>

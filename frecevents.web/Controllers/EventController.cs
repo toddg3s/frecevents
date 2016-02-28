@@ -30,7 +30,21 @@ namespace frecevents.web.Controllers
 
       public ActionResult List(string type)
       {
-        return View();
+        var model = ModelBase.Default;
+        List<EventModel> list = null;
+        if (type.Equals("upcoming", StringComparison.InvariantCultureIgnoreCase))
+        {
+          list = model.UpcomingEvents;
+        }
+        else if (type.Equals("past", StringComparison.InvariantCultureIgnoreCase))
+        {
+          list = (from e in model.AllEvents where e.StartDateTime < DateTime.Now select e).ToList();
+        }
+        else
+        {
+          list = model.AllEvents;
+        }
+        return View(list);
       }
 
       public ActionResult Edit(string id)

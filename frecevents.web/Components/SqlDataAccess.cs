@@ -2,6 +2,7 @@
 using frecevents.web.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,12 +69,24 @@ namespace frecevents.web.Components
 
         public void Register(Models.RegistrationModel reg)
         {
-            throw new NotImplementedException();
+          var original = Context.Registrations.Find(reg.EventID, reg.RiderID);
+          if (original != null)
+          {
+            Context.Entry(original).CurrentValues.SetValues(reg);
+            Context.SaveChanges();
+            return;
+          }
+          var newreg = Context.Registrations.Create();
+          Context.Entry(newreg).CurrentValues.SetValues(reg);
+          Context.SaveChanges();
         }
 
         public void Unregister(string EventID, int RiderID)
         {
-            throw new NotImplementedException();
+          var original = Context.Registrations.Find(EventID, RiderID);
+          if (original == null) return;
+          Context.Registrations.Remove(original);
+          Context.SaveChanges();
         }
 
 
