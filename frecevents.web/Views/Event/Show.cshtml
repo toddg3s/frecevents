@@ -30,7 +30,7 @@
                     <div class="grid_4 bg-secondary1">
                         @if (Root.Login == null)
                         {
-                            <h4>Not logged in</h4>
+                            <div>@Html.ActionLink("Log in to register for an event", "Login", "Home", routeValues: new { @return= Request.Path}, htmlAttributes: null)</div>
                         }
                         else
                         {

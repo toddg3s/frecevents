@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="freceventsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="freceventsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="EventInfo">
           <Key>
             <PropertyRef Name="ID" />
@@ -14,9 +14,9 @@
           <Property Name="StartDateTime" Type="datetime" Nullable="false" />
           <Property Name="EndDateTime" Type="datetime" Nullable="false" />
           <Property Name="EventType" Type="varchar" MaxLength="50" />
-          <Property Name="EventSite" Type="varchar" MaxLength="100" />
+          <Property Name="EventSite" Type="varchar" MaxLength="300" />
           <Property Name="Description" Type="varchar" MaxLength="4000" />
-          <Property Name="SiteURL" Type="nchar" MaxLength="10" />
+          <Property Name="SiteURL" Type="varchar" MaxLength="400" />
           <Property Name="SiteAddress" Type="varchar" MaxLength="300" />
           <Property Name="MapURL" Type="varchar" MaxLength="300" />
           <Property Name="Notes" Type="varchar" MaxLength="4000" />
@@ -29,6 +29,7 @@
           <Property Name="eventID" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="RiderID" Type="int" Nullable="false" />
           <Property Name="Notes" Type="varchar" MaxLength="4000" />
+          <Property Name="TrailerSpace" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Rider">
           <Key>
@@ -44,9 +45,6 @@ warning 6002: The table/view 'graysoft_frecevents.freceventsweb.Event' does not 
         <EntityType Name="Event">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="Title" />
-            <PropertyRef Name="StartDateTime" />
-            <PropertyRef Name="EndDateTime" />
           </Key>
           <Property Name="ID" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Title" Type="varchar" MaxLength="300" Nullable="false" />
@@ -98,8 +96,7 @@ warning 6002: The table/view 'graysoft_frecevents.freceventsweb.Event' does not 
             <End Role="Registration" EntitySet="Registration" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="freceventsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -114,7 +111,7 @@ warning 6002: The table/view 'graysoft_frecevents.freceventsweb.Event' does not 
           <Property Name="EventType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EventSite" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
-          <Property Name="SiteURL" Type="String" MaxLength="400" FixedLength="true" Unicode="true" />
+          <Property Name="SiteURL" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
           <Property Name="SiteAddress" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="MapURL" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="Notes" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
@@ -130,7 +127,7 @@ warning 6002: The table/view 'graysoft_frecevents.freceventsweb.Event' does not 
           <Property Name="Notes" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="EventInfo" Relationship="Self.FK_Registration_Event" FromRole="Registration" ToRole="EventInfo" />
           <NavigationProperty Name="Rider" Relationship="Self.FK_Registration_Rider" FromRole="Registration" ToRole="Rider" />
-          <Property Name="TrailerSpace" Type="Int32" Nullable="false" ConcurrencyMode="None" />
+          <Property Name="TrailerSpace" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Rider">
           <Key>
@@ -145,9 +142,6 @@ warning 6002: The table/view 'graysoft_frecevents.freceventsweb.Event' does not 
         <EntityType Name="Event">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="Title" />
-            <PropertyRef Name="StartDateTime" />
-            <PropertyRef Name="EndDateTime" />
           </Key>
           <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Title" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
@@ -218,6 +212,7 @@ warning 6002: The table/view 'graysoft_frecevents.freceventsweb.Event' does not 
           <EntitySetMapping Name="Registrations">
             <EntityTypeMapping TypeName="freceventsModel.Registration">
               <MappingFragment StoreEntitySet="Registration">
+                <ScalarProperty Name="TrailerSpace" ColumnName="TrailerSpace" />
                 <ScalarProperty Name="eventID" ColumnName="eventID" />
                 <ScalarProperty Name="RiderID" ColumnName="RiderID" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />

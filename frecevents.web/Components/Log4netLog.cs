@@ -11,6 +11,7 @@ namespace frecevents.web.Components
     public Log4netLog()
     {
       log4net.Config.XmlConfigurator.Configure();
+      _log = log4net.LogManager.GetLogger("Default");
     }
 
     private log4net.ILog _log;

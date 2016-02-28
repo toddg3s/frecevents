@@ -19,6 +19,7 @@ namespace frecevents.web.Models
     }
     public virtual string FormatDateRange(DateFormat format)
     {
+      var sb = new StringBuilder();
       switch (format)
       {
         case DateFormat.StartShort:
@@ -87,8 +88,22 @@ namespace frecevents.web.Models
           {
             return EndDateTime.ToString("dddd, MMMM d, yyyy");
           }
+        case DateFormat.List:
+          if (StartDateTime == DateTime.MinValue) return "";
+          sb.Append(FormatDateRange(DateFormat.StartLong));
+          if (EndDateTime > DateTime.MinValue && EndDateTime.Date != StartDateTime.Date)
+          {
+            sb.Append(" - ");
+            if(EndDateTime.Month != StartDateTime.Month)
+            {
+              sb.Append(EndDateTime.ToString("MMMM"));
+              sb.Append(" ");
+            }
+            sb.Append(EndDateTime.Day);
+          }
+          return sb.ToString();
+          break;
         default:
-          var sb = new StringBuilder();
           sb.Append(FormatDateRange(DateFormat.StartLong));
           if (StartDateTime.Hour > 0)
           {
@@ -118,7 +133,8 @@ namespace frecevents.web.Models
       StartLong,
       EndLong,
       StartFull,
-      EndFull
+      EndFull,
+      List
     }
   }
 }
