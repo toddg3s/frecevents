@@ -87,12 +87,12 @@ namespace frecevents.web.Components
           RiderModel rider = null;
           if (!String.IsNullOrWhiteSpace(Name))
           {
-            var riders = from r in Context.Riders where r.Name.IsEqual(Name) select r;
+            var riders = from r in Context.Riders where r.Name == Name select r;
             rider = RiderModel.FromData(riders.FirstOrDefault());
           }
           if (rider == null && !String.IsNullOrWhiteSpace(Email))
           {
-            var ridersbyemail = from r in Context.Riders where r.Email.IsEqual(Email) select r;
+            var ridersbyemail = from r in Context.Riders where r.Email == Email select r;
             rider = RiderModel.FromData(ridersbyemail.FirstOrDefault());
           }
           return rider;

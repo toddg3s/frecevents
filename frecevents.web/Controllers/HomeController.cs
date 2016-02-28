@@ -5,10 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using frecevents.web.Models;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace frecevents.web.Controllers
 {
-  public class HomeController : Controller
+  public class HomeController : BaseController
   {
     // GET: Home
     public ActionResult Index()
@@ -22,6 +23,47 @@ namespace frecevents.web.Controllers
     {
       Root.Cache.Clear("eventlist");
       return Content("<html><body>Cache cleared</body></html>");
+    }
+
+    public ActionResult Login()
+    {
+      if(Request.Form["site"]!=null)
+      {
+        var value = Regex.Replace(Request.Form["site"], "[^a-zA-Z]", "").ToLower();
+        LoginType lt;
+
+        switch(value)
+        {
+          case "moreleg":
+            lt = LoginType.Member;
+            break;
+          case "heelsdown":
+            lt = LoginType.Admin;
+            break;
+          default:
+            return View(ModelBase.Default);
+        }
+
+        if(Root.Login!=null)
+        {
+          Root.Login = new LoginInfo() { UserType = lt, RiderID = Root.Login.RiderID };
+        }
+        else
+        {
+          Root.Login = new LoginInfo() { UserType = lt };
+        }
+
+        if(Request.Form["private"]!=null && Request.Cookies["logindata"]==null)
+        {
+          Response.Cookies.Add(new HttpCookie("logindata", Root.Login.ToString()));
+        }
+
+        if(Request.QueryString["return"]!=null)
+        {
+          Response.Redirect(Request.QueryString["return"]);
+        }
+      }
+      return View(ModelBase.Default);
     }
 
     public ActionResult Upload()
@@ -138,6 +180,15 @@ namespace frecevents.web.Controllers
               Root.Data.SaveEvent(ev);
               break;
             case "riders":
+              var rider = new RiderModel();
+              rider.Name = GetDataValue(model, data, "Name");
+              rider.Email = GetDataValue(model, data, "Email");
+              var id = GetDataValue(model, data, "ID");
+              if(!String.IsNullOrWhiteSpace(id))
+              {
+                rider.ID = Int32.Parse(id);
+              }
+              Root.Data.SaveRider(rider);
               break;
           }
         }

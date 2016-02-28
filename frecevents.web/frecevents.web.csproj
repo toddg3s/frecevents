@@ -266,6 +266,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BaseController.cs" />
     <Compile Include="Components\ASPNetCache.cs" />
     <Compile Include="Components\Extensions.cs" />
     <Compile Include="Components\Log4netLog.cs" />
@@ -299,6 +300,7 @@
     <Compile Include="Interfaces\ICache.cs" />
     <Compile Include="Interfaces\IDataAccess.cs" />
     <Compile Include="Interfaces\ILog.cs" />
+    <Compile Include="LoginInfo.cs" />
     <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\EventGroupModel.cs" />
     <Compile Include="Models\EventInfoModel.cs" />
@@ -325,6 +327,8 @@
     <Content Include="Views\Home\uploadx.cshtml" />
     <Content Include="Views\Event\EventNotFound.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Event\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

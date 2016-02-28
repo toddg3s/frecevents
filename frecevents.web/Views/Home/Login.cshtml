@@ -1,0 +1,39 @@
+﻿@model frecevents.web.Models.ModelBase
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+<div class="header-parall" data-stellar-background-ratio="0.8">
+</div>
+<div style="display: block; height: 60px;"></div>
+
+<div class="bg-secondary2 bg-pl">
+    <div class="container cont-1">
+        <div class="row">
+            <h3 style="color: red">NOTICE</h3>
+            <p>The use of this site is intended for the owners, staff and members of the Freedom Run Equestrian Center.</p>
+            @using (@Html.BeginForm())
+            {
+                <p>Enter the site password to continue: @Html.Password("site")</p>
+                <p>
+                    <div>@Html.CheckBox("private") Check here if this is a private device</div>
+                    <div style="font-size: smaller; line-height: normal; color: darkgray; margin-left: 20px;">
+                        Checking this box will &quot;remember&quot; you on this device by setting a cookie in your browser.  The cookie contains no
+                        sentitive data, and is only used to keep track of the fact that you have successfully entered the password on this device.  If you know how cookies work and have
+                        decided to disable them, then checking this box will have no effect, and you will have to log on each time you want to make changes on the site.
+                    </div>
+                </p>
+                <p>Please note that we have kept the security on this site very simple.  Once you log in, you will be able to make changes for yourself as well as other riders.  By 
+                   logging on, you agree to only make changes for yourself or for other riders who have authorized you to do so.  If this privilege is abused, then we will be 
+                   forced to implement stronger security, which will just be a bigger pain for everyone.</p>
+                <p><input type="submit" value="Login" /></p>
+            }
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $("#site").focus();
+</script>

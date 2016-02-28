@@ -7,7 +7,7 @@ using frecevents.web.Models;
 
 namespace frecevents.web.Controllers
 {
-    public class EventController : Controller
+    public class EventController : BaseController
     {
         // GET: Event
         public ActionResult Show(string id)
@@ -26,6 +26,31 @@ namespace frecevents.web.Controllers
         var mb = new ModelBase();
         mb.Initialize();
         return View(mb);
+      }
+
+      public ActionResult List(string type)
+      {
+        return View();
+      }
+
+      public ActionResult Edit(string id)
+      {
+        if(Root.Login==null || Root.Login.UserType == LoginType.Member)
+        {
+          Response.Redirect("/Home/Login?return=" + Request.Path);
+        }
+
+        if(String.IsNullOrEmpty(id))
+        {
+          return Redirect("/Home/index");
+        }
+        if(IsPostBack())
+        {
+
+        }
+
+        var eventinfo = Root.Data.GetEvent(id);
+        return View(eventinfo);
       }
     }
 }

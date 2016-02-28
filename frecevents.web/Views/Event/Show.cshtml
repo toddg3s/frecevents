@@ -14,25 +14,25 @@
                 <h3 class='well center h-cont'>@Model.Title</h3>
             </div><!--/grid-->
             <div class="grid_6 bg-secondary2">
-                <div class="grid_6 wow fadeInLeft bg-secondary1" data-wow-delay="0.4s">
+                <div class="grid_5 bg-secondary1" data-wow-delay="0.4s">
                     <div class="grid_1 box-cont1 mrg0 center">
                         <img src="~/images/cal_icon.png" />
                     </div>
-                    <div class="grid_5 bg-secondary1">
+                    <div class="grid_4 bg-secondary1">
                         <h4 class="center">@Model.FormatDateRange(frecevents.web.Models.EventModel.DateFormat.Normal)</h4>
                     </div>
                 </div>
-                <div class="grid_6 bg-secondary2" data-wow-delay="0.4s">&nbsp;</div>
-                    <div class="grid_6 wow fadeInLeft bg-secondary1" data-wow-delay="0.4s">
-                        <div class="grid_1 box-cont1 mrg0 center">
-                            <img src="~/images/register_icon.png" />
-                        </div>
-                        <div class="grid_5 bg-secondary1">
-                            <h4 class="center">You are NOT registered for this event</h4>
-                        </div>
+                <div class="grid_5 bg-secondary2" data-wow-delay="0.4s">&nbsp;</div>
+                <div class="grid_5 bg-secondary1" data-wow-delay="0.4s">
+                    <div class="grid_1 box-cont1 mrg0 center">
+                        <img src="~/images/register_icon.png" />
+                    </div>
+                    <div class="grid_4 bg-secondary1">
+                        <h4 class="center">You are NOT registered for this event</h4>
                     </div>
                 </div>
-            <div class="grid_6 bg-secondary2" data-wow-delay="0.4s">&nbsp;</div>
+                <div class="grid_5 bg-secondary2" data-wow-delay="0.4s">&nbsp;</div>
+            </div>
             <div class="grid_6 wow fadeInRight bg-secondary1" data-wow-delay="0.4s">
                 <div class="grid_1 box-cont1 mrg0 center">
                     <img src="~/images/location_icon.png" />
@@ -48,7 +48,6 @@
                         <div class="center">
                             <iframe src="@Model.MapUrl" width="300" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
                         </div>
-
                     }
                 </div>
             </div>
@@ -58,7 +57,7 @@
 <div class="bg-secondary1 bg-pl">
     <div class="container cont-1">
         <div class="row">
-            <div class="grid_1 wow fadeInUp center" data-wow-delay="0.2s">
+            <div class="grid_1 box-cont1 mrg0 center" data-wow-delay="0.2s">
                 <img src="~/images/info_icon.png" />
             </div><!--/grid-->
             <div class="grid_11 wow fadeInDown" data-wow-delay="0.4s">
@@ -67,8 +66,30 @@
         </div>
     </div>
 </div>
+<div class="bg-secondary2 bg-pl">
+    <div class="container cont-1">
+        <div class="row">
+            <div class="grid_6 bg-secondary1">
+                <div class="grid_1 box-cont1 mrg0 center" data-wow-delay="0.2s">
+                    <img src="~/images/riders_icon.png" />
+                </div><!--/grid-->
+                <div class="grid_5 wow fadeInDown" data-wow-delay="0.4s">
+                    Rider list
+                </div>
+            </div>
+            <div class="grid_6 bg-secondary1">
+                <div class="grid_1 box-cont1 mrg0 center" data-wow-delay="0.2s">
+                    <img src="~/images/results_icon.png" />
+                </div><!--/grid-->
+                <div class="grid_5 wow fadeInDown" data-wow-delay="0.4s">
+                    Results list
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-        <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-            @Html.ActionLink("Back to List", "Index")
-        </p>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
