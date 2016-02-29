@@ -12,12 +12,55 @@ namespace frecevents.web.Controllers
         // GET: Event
         public ActionResult Show(string id)
         {
-          var ei = Root.Data.GetEvent(id);
-          if(ei==null)
+          EventInfoModel ei = null;
+          if(IsPostBack())
           {
-              return View("EventNotFound",ModelBase.Default);
+            ei = Session["currentevent"] as EventInfoModel;
+
+            if(Request.Form["action"]!=null)
+            {
+              // register or update
+            }
+            if(Request.Form["unregister"]!=null)
+            {
+              Root.Data.Unregister(ei.CurrentRegistration.EventID, ei.CurrentRegistration.RiderID);
+              var rider = ei.Riders.Select(r => r.ID == ei.CurrentRegistration.RiderID).First();
+              ei.Riders.Remove(rider);
+              // unregister
+            }
+            if (Request.Form["newrider"] != null && Request.Form["newrider"] != "0")
+            {
+              ei.CurrentRegistration.RiderID = Int32.Parse(Request.Form["newrider"]);
+            }
+
           }
-          ei.Initialize();
+          else
+          {
+            ei = Root.Data.GetEvent(id);
+            if (ei == null)
+            {
+              return View("EventNotFound", ModelBase.Default);
+            }
+            ei.Initialize();
+
+            if (Root.Login != null && Root.Login.RiderID != 0)
+            {
+              ei.CurrentRegistration = Root.Data.GetRegistration(ei.ID, Root.Login.RiderID);
+              if(ei.CurrentRegistration==null)
+              {
+                ei.CurrentRegistration = new RegistrationModel() { EventID = ei.ID, RiderID = Root.Login.RiderID };
+              }
+              else
+              {
+                ei.CurrentRegistration.Registered = true;
+              }
+            }
+            else
+            {
+              ei.CurrentRegistration = new RegistrationModel() { EventID = ei.ID };
+            }
+            Session["currentevent"] = ei;
+          }
           return View(ei);
         }
 

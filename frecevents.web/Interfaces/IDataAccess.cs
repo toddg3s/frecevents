@@ -15,10 +15,12 @@ namespace frecevents.web.Interfaces
     void SaveEvent(Models.EventInfoModel Event);
     void DeleteEvent(string ID);
 
+    List<Models.RiderModel> GetRiders();
     Models.RiderModel GetRider(int ID);
     Models.RiderModel FindRider(string Name, string Email);
     void SaveRider(Models.RiderModel Rider);
 
+    Models.RegistrationModel GetRegistration(string EventID, int RiderID);
     void Register(Models.RegistrationModel reg);
     void Unregister(string EventID, int RiderID);
   }

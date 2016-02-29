@@ -13,7 +13,8 @@ namespace frecevents.web.Models
     public List<EventGroupModel> PastEvents { get; set; }
     public List<EventModel> UpcomingEvents { get; set; }
     public List<EventModel> TopUpcomingEvents { get; set; }
-    public List<EventModel> AllEvents { get; set; } 
+    public List<EventModel> AllEvents { get; set; }
+    public List<RiderModel> Riders { get; set; }
 
     public ModelBase()
     {
@@ -21,6 +22,7 @@ namespace frecevents.web.Models
       UpcomingEvents = new List<EventModel>();
       TopUpcomingEvents = new List<EventModel>();
       AllEvents = new List<EventModel>();
+      Riders = new List<RiderModel>();
     }
 
     private static ModelBase s_default;
@@ -74,14 +76,20 @@ namespace frecevents.web.Models
       {
         PastEvents.Add(currgroup);
       }
+
+      Riders = Root.Cache.Get("riderlist") as List<RiderModel>;
+      if(Riders==null)
+      {
+        Riders = Root.Data.GetRiders();
+        Root.Cache.Set("riderlist", Riders);
+      }
     }
 
     protected List<EventModel> GetEvents()
     {
-        List<EventModel> list = (List<EventModel>)Root.Cache.Get("eventlist");
+      var list = Root.Cache.Get("eventlist") as List<EventModel>;
       if (list == null)
       {
-          freceventsEntities ctx = new freceventsEntities();
           list = Root.Data.GetEvents();
           Root.Cache.Set("eventlist", list);
       }

@@ -816,6 +816,12 @@ nav {
 .hidd {
   overflow: hidden;
 }
+.disclaimer {
+    font-size: x-small;
+    line-height: normal; 
+    color: darkgray; 
+    margin-left: 20px;
+}
 /*========================================================
                   Owl Carousel styles
 =========================================================*/

@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace frecevents.web.Models
 {
-    public class RegistrationModel : ModelBase
+    public class RegistrationModel
     {
       public string EventID { get; set; }
       public int RiderID { get; set; }
+      public string Notes { get; set; }
       public int TrailerSpace { get; set; }
+      public bool Registered { get; set; }
     }
 }

@@ -34,7 +34,70 @@
                         }
                         else
                         {
-                            <h4>Logged in</h4>
+                            <div>
+                                @using (Html.BeginForm())
+                                {
+                                    var message = "";
+                                    var instructions = "";
+                                    var action = "";
+                                    if (Model.CurrentRegistration.RiderID == 0)
+                                    {
+                                        <div>Select a rider from the list below to register</div>
+                                    }
+                                    else
+                                    {
+                                        <div>
+                                            @{
+                                            var name = (from r in Model.Riders where r.ID == Model.CurrentRegistration.RiderID select r.Name).FirstOrDefault();
+                                            if (Model.CurrentRegistration.Registered)
+                                            {
+                                                message = name + " will be attending this event.";
+                                                instructions = "You may update the information below and click 'Update' or click 'I'm not going'";
+                                                action = "Update";
+                                            }
+                                            else
+                                            {
+                                                message = name + " will NOT be attending this event.";
+                                                instructions = "Fill out the information below and click 'I'm going!'.";
+                                                action = "I'm going!";
+                                            }
+                                            }
+                                            <div>@message</div>
+                                            <div style="font-size: smaller">@instructions</div>
+                                            <div>
+                                                <select name="traileroption">
+                                                    <option value="1">I have space in my trailer for</option>
+                                                    <option value="-1">I need space in a trailer for</option>
+                                                </select>
+                                                @Html.TextBoxFor(model => model.CurrentRegistration.TrailerSpace, htmlAttributes: new { style = "width: 20px" }) 
+                                                horse(s)
+                                            </div>
+                                            <div>Comment (short):<br/>
+                                            @Html.TextAreaFor(model => model.CurrentRegistration.Notes)
+                                            </div>
+                                            <div>@Html.CheckBoxFor(model => model.CurrentRegistration.Registered) Please register me for this event</div>
+                                            <div class="disclaimer">
+                                                This option is available only for riders that have given their registration information
+                                                (including payment information) to Freedom Run
+                                            </div>
+                                            <input name="action" type="submit" value="@action" />
+                                            @if (Model.CurrentRegistration.Registered)
+                                            {
+                                                <input type="submit" name="unregister" value="I'm not going'"/>
+                                            }
+                                        </div>
+                                    }
+                                    <div>
+                                        Riders: <select name="newrider" onchange="javascript: document.forms[0].submit()">
+                                                    <option value="0">Select...</option>
+                                            @foreach (var rider in Model.Riders)
+                                            {
+                                                <option value="@rider.ID">@rider.Name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                }
+                            </div>
                         }
                     </div>
                 </div>

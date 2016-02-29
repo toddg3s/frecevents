@@ -16,6 +16,14 @@ namespace frecevents.web.Models
     public string MapUrl { get; set; }
     public string Notes { get; set; }
 
+    public Dictionary<int, int> RegisteredRiders { get; set; }
+    public RegistrationModel CurrentRegistration { get; set; }
+
+    public EventInfoModel() : base()
+    {
+      RegisteredRiders = new Dictionary<int, int>();
+     }
+
     private string _deschtml = "";
     public string DescriptionHTML
     {
