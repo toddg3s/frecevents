@@ -20,8 +20,9 @@ namespace frecevents.web.Controllers
             {
               ei.CurrentRegistration.TrailerSpace = int.Parse(Request["traileroption"])*
                                                     int.Parse(Request["trailerspace"]);
-              ei.CurrentRegistration.Notes = Request["Notes"];
-              if (Request["request"] != null)
+              ei.CurrentRegistration.Notes = Request.Form["CurrentRegistration.Notes"];
+              if (Request.Form["CurrentRegistration.Request"] != null && 
+                Request.Form["CurrentRegistration.Request"].Equals("true", StringComparison.InvariantCultureIgnoreCase))
               {
                 if (ei.CurrentRegistration.RegistrationRequest != 2)
                 {
@@ -32,19 +33,20 @@ namespace frecevents.web.Controllers
               {
                 ei.CurrentRegistration.RegistrationRequest = 3;
               }
+              Root.Data.Register(ei.CurrentRegistration);
             }
             if(Request.Form["unregister"]!=null)
             {
               Root.Data.Unregister(ei.CurrentRegistration.EventID, ei.CurrentRegistration.RiderID);
-              var rider = ei.Riders.First(r => r.ID == ei.CurrentRegistration.RiderID);
-              ei.Riders.Remove(rider);
+              ei.RegisteredRiders.Remove(ei.CurrentRegistration.RiderID);
               ei.CurrentRegistration = new RegistrationModel() { EventID = ei.ID, RiderID = ei.CurrentRegistration.RiderID };
             }
             if (Request.Form["newrider"] != null && Request.Form["newrider"] != "0")
             {
-              ei.CurrentRegistration.RiderID = Int32.Parse(Request.Form["newrider"]);
+              Root.Login.RiderID = Int32.Parse(Request.Form["newrider"]);
+              ei.CurrentRegistration = Root.Data.GetRegistration(ei.ID, Root.Login.RiderID) ??
+                                       new RegistrationModel() { EventID = ei.ID, RiderID = Root.Login.RiderID };
             }
-            Root.Data.Register(ei.CurrentRegistration);
           }
           else
           {
@@ -98,6 +100,7 @@ namespace frecevents.web.Controllers
         }
 
         var eventinfo = Root.Data.GetEvent(id);
+        eventinfo.Initialize();
         return View(eventinfo);
       }
     }

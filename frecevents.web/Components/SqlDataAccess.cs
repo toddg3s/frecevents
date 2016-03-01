@@ -89,8 +89,8 @@ namespace frecevents.web.Components
         Context.SaveChanges();
         return;
       }
-      var newreg = Context.Registrations.Create();
-      Context.Entry(newreg).CurrentValues.SetValues(reg);
+
+      Context.Registrations.Add(reg.ToData());
       Context.SaveChanges();
     }
 

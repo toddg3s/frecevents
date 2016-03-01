@@ -22,5 +22,10 @@ namespace frecevents.web.Models
       {
         get { return (RegistrationRequest == 1 || RegistrationRequest == 2); }
       }
+
+      public Registration ToData()
+      {
+        return new Registration() { eventID = this.EventID, RiderID = this.RiderID, Notes = this.Notes, TrailerSpace = this.TrailerSpace, RegistrationRequest = Convert.ToInt16(this.RegistrationRequest) };
+      }
     }
 }

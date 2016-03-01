@@ -8,8 +8,35 @@ namespace frecevents.web
 {
   public class LoginInfo
   {
-    public LoginType UserType { get; set; }
-    public int RiderID { get; set; }
+    private LoginType _userType;
+    private int _riderId;
+
+    public LoginType UserType
+    {
+      get
+      {
+        return _userType;
+      }
+      set
+      {
+        if (_userType == value) return;
+        _userType = value;
+        if (Changed != null) Changed(this, new EventArgs());
+      }
+    }
+    public int RiderID {
+      get 
+      {
+        return _riderId;
+      }
+
+      set 
+      {
+        if (_riderId == value) return;
+        _riderId = value;
+        if (Changed != null) Changed(this, new EventArgs());
+      }
+    }
 
     public static LoginInfo Parse(string logindata)
     {
@@ -17,7 +44,7 @@ namespace frecevents.web
       {
         throw new ArgumentException("Empty logindata passed to Parse method", "logindata");
       }
-      var parts = logindata.Split(";".ToCharArray());
+      var parts = logindata.Split("|".ToCharArray());
       LoginType lt;
       int riderid = 0;
 
@@ -35,9 +62,11 @@ namespace frecevents.web
       return new LoginInfo() { UserType = lt, RiderID = riderid };
     }
 
+    public event EventHandler Changed;
+
     public override string ToString()
     {
-      return Enum.GetName(typeof(LoginType), UserType) + ";" + RiderID.ToString();
+      return Enum.GetName(typeof(LoginType), UserType) + "|" + RiderID.ToString();
     }
   }
 

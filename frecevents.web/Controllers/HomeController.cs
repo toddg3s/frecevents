@@ -22,6 +22,7 @@ namespace frecevents.web.Controllers
     public ActionResult ClearCache()
     {
       Root.Cache.Clear("eventlist");
+      Root.Cache.Clear("riderlist");
       return Content("<html><body>Cache cleared</body></html>");
     }
 
@@ -55,12 +56,16 @@ namespace frecevents.web.Controllers
 
         if(Request.Form["private"]!=null && Request.Cookies["logindata"]==null)
         {
-          Response.Cookies.Add(new HttpCookie("logindata", Root.Login.ToString()));
+          Response.Cookies.Add(new HttpCookie("logindata", Root.Login.ToString()) { Expires = DateTime.MaxValue });
         }
 
         if(Request.QueryString["return"]!=null)
         {
           Response.Redirect(Request.QueryString["return"]);
+        }
+        else
+        {
+          Response.Redirect("/Home/index");
         }
       }
       return View(ModelBase.Default);

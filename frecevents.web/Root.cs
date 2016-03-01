@@ -46,7 +46,7 @@ namespace frecevents.web
           HttpContext.Current.Session["logindata"] = value;
           _login = LoginInfo.Parse(value);
         }
-
+        _login.Changed += (login, args) => SaveLogin(login.ToString());
         return _login;
       }
       set
@@ -56,11 +56,19 @@ namespace frecevents.web
           return;
         }
         _login = value;
-        HttpContext.Current.Session["logindata"] = _login.ToString();
-        if(HttpContext.Current.Request.Cookies["logindata"]!=null)
-        {
-          HttpContext.Current.Response.SetCookie(new HttpCookie("logindata", _login.ToString()));
-        }
+        _login.Changed += (login, args) => SaveLogin(login.ToString());
+
+        SaveLogin(_login.ToString());
+      }
+    }
+
+    private static void SaveLogin(string logindata)
+    {
+      HttpContext.Current.Session["logindata"] = logindata;
+      if(HttpContext.Current.Request.Cookies["logindata"]!=null)
+      {
+        HttpContext.Current.Response.Cookies.Remove("logindata");
+        HttpContext.Current.Response.Cookies.Add(new HttpCookie("logindata", _login.ToString()) { Expires = System.DateTime.MaxValue });
       }
     }
   }

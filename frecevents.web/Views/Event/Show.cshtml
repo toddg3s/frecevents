@@ -64,30 +64,30 @@
                                             }
                                             }
                                             <div>@message</div>
-                                            <div style="font-size: smaller">@instructions</div>
+                                            <div style="font-size: smaller; line-height: normal">@instructions</div>
                                             <div>
                                                 <select name="traileroption">
-                                                    <option value="1" @(Model.CurrentRegistration.TrailerSpace >= 0 ? "selected" : "")>I have space in my trailer for</option>
-                                                    <option value="-1" @(Model.CurrentRegistration.TrailerSpace < 0 ? "selected" : "")>I need space in a trailer for</option>
+                                                    <option value="1" @(Model.CurrentRegistration.TrailerSpace > 0 ? "selected" : "")>I have space in my trailer for</option>
+                                                    <option value="-1" @(Model.CurrentRegistration.TrailerSpace <= 0 ? "selected" : "")>I need space in a trailer for</option>
                                                 </select>
                                                 <select name="trailerspace">
-                                                    <option value="0" @(space == 0 ? "selected" : "")></option>
-                                                    <option value="0" @(space == 1 ? "selected" : "")></option>
-                                                    <option value="0" @(space == 2 ? "selected" : "")></option>
-                                                    <option value="0" @(space == 3 ? "selected" : "")></option>
-                                                    <option value="0" @(space == 4 ? "selected" : "")></option>
-                                                    <option value="0" @(space == 5 ? "selected" : "")></option>
-                                                    <option value="0" @(space == 6 ? "selected" : "")></option>
-                                                    <option value="0" @(space == 7 ? "selected" : "")></option>
-                                                    <option value="0" @(space == 8 ? "selected" : "")></option>
-                                                    <option value="0" @(space == 9 ? "selected" : "")></option>
+                                                    <option value="0" @(space == 0 ? "selected" : "")>0</option>
+                                                    <option value="1" @(space == 1 ? "selected" : "")>1</option>
+                                                    <option value="2" @(space == 2 ? "selected" : "")>2</option>
+                                                    <option value="3" @(space == 3 ? "selected" : "")>3</option>
+                                                    <option value="4" @(space == 4 ? "selected" : "")>4</option>
+                                                    <option value="5" @(space == 5 ? "selected" : "")>5</option>
+                                                    <option value="6" @(space == 6 ? "selected" : "")>6</option>
+                                                    <option value="7" @(space == 7 ? "selected" : "")>7</option>
+                                                    <option value="8" @(space == 8 ? "selected" : "")>8</option>
+                                                    <option value="9" @(space == 9 ? "selected" : "")>9</option>
                                                 </select>
                                                 horse(s)
                                             </div>
                                             <div>Comment (short):<br/>
                                             @Html.TextAreaFor(model => model.CurrentRegistration.Notes)
                                             </div>
-                                            <div>@Html.CheckBoxFor(model => model.CurrentRegistration.Request) Please register me for this event</div>
+                                            <div>@Html.CheckBoxFor(model => model.CurrentRegistration.Request) Please register for this event on my behalf</div>
                                             <div class="disclaimer">
                                                 This option is available only for riders that have given their registration information
                                                 (including payment information) to Freedom Run
@@ -95,13 +95,13 @@
                                             <input name="action" type="submit" value="@action" />
                                             @if (Model.CurrentRegistration.Registered)
                                             {
-                                                <input type="submit" name="unregister" value="I'm not going'"/>
+                                                <input type="submit" name="unregister" value="I'm not going"/>
                                             }
                                         </div>
                                     }
-                                    <div>
-                                        Riders: <select name="newrider" onchange="javascript: document.forms[0].submit()">
-                                                    <option value="0">Select...</option>
+                                    <div style="margin-top: 10px;">
+                                        <select name="newrider" onchange="javascript: document.forms[0].submit()">
+                                                    <option value="0">Select @(Model.CurrentRegistration.RiderID==0 ? "a" : "another") rider...</option>
                                             @foreach (var rider in Model.Riders)
                                             {
                                                 <option value="@rider.ID">@rider.Name</option>
