@@ -49,6 +49,7 @@
                                         <div>
                                             @{
                                             var name = (from r in Model.Riders where r.ID == Model.CurrentRegistration.RiderID select r.Name).FirstOrDefault();
+                                            var space = Math.Abs(Model.CurrentRegistration.TrailerSpace);
                                             if (Model.CurrentRegistration.Registered)
                                             {
                                                 message = name + " will be attending this event.";
@@ -66,16 +67,27 @@
                                             <div style="font-size: smaller">@instructions</div>
                                             <div>
                                                 <select name="traileroption">
-                                                    <option value="1">I have space in my trailer for</option>
-                                                    <option value="-1">I need space in a trailer for</option>
+                                                    <option value="1" @(Model.CurrentRegistration.TrailerSpace >= 0 ? "selected" : "")>I have space in my trailer for</option>
+                                                    <option value="-1" @(Model.CurrentRegistration.TrailerSpace < 0 ? "selected" : "")>I need space in a trailer for</option>
                                                 </select>
-                                                @Html.TextBoxFor(model => model.CurrentRegistration.TrailerSpace, htmlAttributes: new { style = "width: 20px" }) 
+                                                <select name="trailerspace">
+                                                    <option value="0" @(space == 0 ? "selected" : "")></option>
+                                                    <option value="0" @(space == 1 ? "selected" : "")></option>
+                                                    <option value="0" @(space == 2 ? "selected" : "")></option>
+                                                    <option value="0" @(space == 3 ? "selected" : "")></option>
+                                                    <option value="0" @(space == 4 ? "selected" : "")></option>
+                                                    <option value="0" @(space == 5 ? "selected" : "")></option>
+                                                    <option value="0" @(space == 6 ? "selected" : "")></option>
+                                                    <option value="0" @(space == 7 ? "selected" : "")></option>
+                                                    <option value="0" @(space == 8 ? "selected" : "")></option>
+                                                    <option value="0" @(space == 9 ? "selected" : "")></option>
+                                                </select>
                                                 horse(s)
                                             </div>
                                             <div>Comment (short):<br/>
                                             @Html.TextAreaFor(model => model.CurrentRegistration.Notes)
                                             </div>
-                                            <div>@Html.CheckBoxFor(model => model.CurrentRegistration.Registered) Please register me for this event</div>
+                                            <div>@Html.CheckBoxFor(model => model.CurrentRegistration.Request) Please register me for this event</div>
                                             <div class="disclaimer">
                                                 This option is available only for riders that have given their registration information
                                                 (including payment information) to Freedom Run

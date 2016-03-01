@@ -12,6 +12,15 @@ namespace frecevents.web.Models
       public int RiderID { get; set; }
       public string Notes { get; set; }
       public int TrailerSpace { get; set; }
-      public bool Registered { get; set; }
+      public int RegistrationRequest { get; set; }
+      public bool Registered
+      {
+        get { return (RegistrationRequest > 0); }
+      }
+
+      public bool Request
+      {
+        get { return (RegistrationRequest == 1 || RegistrationRequest == 2); }
+      }
     }
 }

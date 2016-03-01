@@ -18,6 +18,7 @@ namespace frecevents.web
         public int RiderID { get; set; }
         public string Notes { get; set; }
         public int TrailerSpace { get; set; }
+        public short RegistrationRequest { get; set; }
     
         public virtual EventInfo EventInfo { get; set; }
         public virtual Rider Rider { get; set; }

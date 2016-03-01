@@ -77,7 +77,7 @@ namespace frecevents.web.Components
     {
       var reg = Context.Registrations.Find(EventID, RiderID);
       if (reg == null) return null;
-      return new RegistrationModel() { EventID = reg.eventID, RiderID = reg.RiderID, TrailerSpace = reg.TrailerSpace, Notes = reg.Notes };
+      return new RegistrationModel() { EventID = reg.eventID, RiderID = reg.RiderID, TrailerSpace = reg.TrailerSpace, Notes = reg.Notes, RegistrationRequest = reg.RegistrationRequest };
     }
 
     public void Register(Models.RegistrationModel reg)

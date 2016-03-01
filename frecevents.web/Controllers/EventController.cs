@@ -9,7 +9,6 @@ namespace frecevents.web.Controllers
 {
     public class EventController : BaseController
     {
-        // GET: Event
         public ActionResult Show(string id)
         {
           EventInfoModel ei = null;
@@ -19,20 +18,33 @@ namespace frecevents.web.Controllers
 
             if(Request.Form["action"]!=null)
             {
-              // register or update
+              ei.CurrentRegistration.TrailerSpace = int.Parse(Request["traileroption"])*
+                                                    int.Parse(Request["trailerspace"]);
+              ei.CurrentRegistration.Notes = Request["Notes"];
+              if (Request["request"] != null)
+              {
+                if (ei.CurrentRegistration.RegistrationRequest != 2)
+                {
+                  ei.CurrentRegistration.RegistrationRequest = 1;
+                }
+              }
+              else
+              {
+                ei.CurrentRegistration.RegistrationRequest = 3;
+              }
             }
             if(Request.Form["unregister"]!=null)
             {
               Root.Data.Unregister(ei.CurrentRegistration.EventID, ei.CurrentRegistration.RiderID);
-              var rider = ei.Riders.Select(r => r.ID == ei.CurrentRegistration.RiderID).First();
+              var rider = ei.Riders.First(r => r.ID == ei.CurrentRegistration.RiderID);
               ei.Riders.Remove(rider);
-              // unregister
+              ei.CurrentRegistration = new RegistrationModel() { EventID = ei.ID, RiderID = ei.CurrentRegistration.RiderID };
             }
             if (Request.Form["newrider"] != null && Request.Form["newrider"] != "0")
             {
               ei.CurrentRegistration.RiderID = Int32.Parse(Request.Form["newrider"]);
             }
-
+            Root.Data.Register(ei.CurrentRegistration);
           }
           else
           {
@@ -45,22 +57,15 @@ namespace frecevents.web.Controllers
 
             if (Root.Login != null && Root.Login.RiderID != 0)
             {
-              ei.CurrentRegistration = Root.Data.GetRegistration(ei.ID, Root.Login.RiderID);
-              if(ei.CurrentRegistration==null)
-              {
-                ei.CurrentRegistration = new RegistrationModel() { EventID = ei.ID, RiderID = Root.Login.RiderID };
-              }
-              else
-              {
-                ei.CurrentRegistration.Registered = true;
-              }
+              ei.CurrentRegistration = Root.Data.GetRegistration(ei.ID, Root.Login.RiderID) ??
+                                       new RegistrationModel() { EventID = ei.ID, RiderID = Root.Login.RiderID };
             }
             else
             {
               ei.CurrentRegistration = new RegistrationModel() { EventID = ei.ID };
             }
-            Session["currentevent"] = ei;
           }
+          Session["currentevent"] = ei;
           return View(ei);
         }
 

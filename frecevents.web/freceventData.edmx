@@ -30,6 +30,7 @@
           <Property Name="RiderID" Type="int" Nullable="false" />
           <Property Name="Notes" Type="varchar" MaxLength="4000" />
           <Property Name="TrailerSpace" Type="int" Nullable="false" />
+          <Property Name="RegistrationRequest" Type="smallint" Nullable="false" />
         </EntityType>
         <EntityType Name="Rider">
           <Key>
@@ -45,6 +46,9 @@ warning 6002: The table/view 'graysoft_frecevents.freceventsweb.Event' does not 
         <EntityType Name="Event">
           <Key>
             <PropertyRef Name="ID" />
+            
+            
+            
           </Key>
           <Property Name="ID" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Title" Type="varchar" MaxLength="300" Nullable="false" />
@@ -128,6 +132,7 @@ warning 6002: The table/view 'graysoft_frecevents.freceventsweb.Event' does not 
           <NavigationProperty Name="EventInfo" Relationship="Self.FK_Registration_Event" FromRole="Registration" ToRole="EventInfo" />
           <NavigationProperty Name="Rider" Relationship="Self.FK_Registration_Rider" FromRole="Registration" ToRole="Rider" />
           <Property Name="TrailerSpace" Type="Int32" Nullable="false" />
+          <Property Name="RegistrationRequest" Type="Int16" Nullable="false" />
         </EntityType>
         <EntityType Name="Rider">
           <Key>
@@ -212,6 +217,7 @@ warning 6002: The table/view 'graysoft_frecevents.freceventsweb.Event' does not 
           <EntitySetMapping Name="Registrations">
             <EntityTypeMapping TypeName="freceventsModel.Registration">
               <MappingFragment StoreEntitySet="Registration">
+                <ScalarProperty Name="RegistrationRequest" ColumnName="RegistrationRequest" />
                 <ScalarProperty Name="TrailerSpace" ColumnName="TrailerSpace" />
                 <ScalarProperty Name="eventID" ColumnName="eventID" />
                 <ScalarProperty Name="RiderID" ColumnName="RiderID" />
