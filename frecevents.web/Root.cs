@@ -46,7 +46,10 @@ namespace frecevents.web
           HttpContext.Current.Session["logindata"] = value;
           _login = LoginInfo.Parse(value);
         }
-        _login.Changed += (login, args) => SaveLogin(login.ToString());
+        if(_login!=null)
+        {
+          _login.Changed += (login, args) => SaveLogin(login.ToString());
+        }
         return _login;
       }
       set

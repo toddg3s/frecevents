@@ -228,6 +228,10 @@
     <Content Include="images\register_icon.png" />
     <Content Include="images\results_icon.png" />
     <Content Include="images\riders_icon.png" />
+    <Content Include="images\slider0.jpg" />
+    <Content Include="images\slider1.jpg" />
+    <Content Include="images\slider2.jpg" />
+    <Content Include="images\slider3.jpg" />
     <Content Include="images\usea_logo.png" />
     <Content Include="js\camera.js" />
     <Content Include="js\device.min.js" />
@@ -298,6 +302,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HandleCustomError.cs" />
     <Compile Include="Interfaces\ICache.cs" />
     <Compile Include="Interfaces\IDataAccess.cs" />
     <Compile Include="Interfaces\ILog.cs" />

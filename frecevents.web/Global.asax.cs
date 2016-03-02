@@ -7,12 +7,19 @@ using System.Web.Routing;
 
 namespace frecevents.web
 {
-    public class MvcApplication : System.Web.HttpApplication
+  public class MvcApplication : System.Web.HttpApplication
+  {
+    protected void Application_Start()
     {
-        protected void Application_Start()
-        {
-            AreaRegistration.RegisterAllAreas();
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-        }
+      AreaRegistration.RegisterAllAreas();
+      RegisterGlobalFilters(GlobalFilters.Filters);
+      RouteConfig.RegisterRoutes(RouteTable.Routes);
     }
+
+    public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+    {
+      filters.Add(new HandleCustomError());
+    }
+
+  }
 }

@@ -206,11 +206,6 @@ namespace frecevents.web.Controllers
 
     public ActionResult Error()
     {
-      var ex = Server.GetLastError();
-      if (ex != null)
-      {
-        Root.Log.Error(ex, ex.Message);
-      }
       return View(ModelBase.Default);
     }
 
