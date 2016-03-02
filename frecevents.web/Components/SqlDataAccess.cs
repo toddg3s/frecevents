@@ -40,7 +40,7 @@ namespace frecevents.web.Components
       var model = EventInfoModel.FromData(ev);
       if (ev != null)
       {
-        ev.Registrations.ToList().ForEach(reg => model.RegisteredRiders.Add(reg.RiderID, reg.TrailerSpace));
+        model.Registrations.AddRange(ev.Registrations.Select(RegistrationModel.FromData));
       }
       return model;
     }

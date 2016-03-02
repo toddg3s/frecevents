@@ -156,7 +156,41 @@
                     <img src="~/images/riders_icon.png" />
                 </div><!--/grid-->
                 <div class="grid_5 wow fadeInDown" data-wow-delay="0.4s">
-                    Rider list
+                    @{
+                        var totalTrailerSpace = Model.Registrations.Sum(reg => reg.TrailerSpace);
+                        var trailermessage = "";
+                        if (totalTrailerSpace < 0)
+                        {
+                            trailermessage = "Overall, we NEED space for " + Math.Abs(totalTrailerSpace).ToString() + " horses";
+                        }
+                        else
+                        {
+                            trailermessage = "We have space for " + Math.Abs(totalTrailerSpace) + " more horses in our trailers";
+                        }
+                        var riderlist =
+                            from reg in Model.Registrations
+                            join rdr in Model.Riders on reg.RiderID equals rdr.ID
+                            orderby rdr.Name
+                            select new {
+                                name = rdr.Name, 
+                                traileroption = (reg.TrailerSpace > 0) ? "has room in a trailer for " : "needs room in a trailer for ", 
+                                trailerspace = Math.Abs(reg.TrailerSpace), 
+                                notes = reg.Notes, 
+                                request = (reg.RegistrationRequest < 3) ? "Please register for the event" : ""};
+                    }
+                    <div style="margin-bottom: 10px;">@trailermessage</div>
+                    @foreach (var rider in riderlist)
+                    {
+                        <div>
+                            <div style="font-weight: bold">@rider.name</div>
+                            <div style="margin-left: 20px;">
+                                @rider.traileroption @rider.trailerspace horse(s)<br/>
+                                @rider.request<br/>
+                                &quot;@rider.notes &quot;
+                            </div>
+                        </div>
+                    }
+
                 </div>
             </div>
             <div class="grid_6 bg-secondary1">

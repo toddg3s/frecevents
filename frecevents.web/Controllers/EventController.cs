@@ -34,11 +34,24 @@ namespace frecevents.web.Controllers
                 ei.CurrentRegistration.RegistrationRequest = 3;
               }
               Root.Data.Register(ei.CurrentRegistration);
+              var reg =
+                ei.Registrations.FirstOrDefault(
+                  r => r.EventID == ei.CurrentRegistration.EventID && r.RiderID == ei.CurrentRegistration.RiderID);
+              if (reg == null)
+              {
+                ei.Registrations.Add(ei.CurrentRegistration);
+              }
+              else
+              {
+                reg.TrailerSpace = ei.CurrentRegistration.TrailerSpace;
+                reg.Notes = ei.CurrentRegistration.Notes;
+                reg.RegistrationRequest = ei.CurrentRegistration.RegistrationRequest;
+              }
             }
             if(Request.Form["unregister"]!=null)
             {
               Root.Data.Unregister(ei.CurrentRegistration.EventID, ei.CurrentRegistration.RiderID);
-              ei.RegisteredRiders.Remove(ei.CurrentRegistration.RiderID);
+              ei.Registrations.Remove(ei.Registrations.First(reg => reg.EventID == ei.CurrentRegistration.EventID && reg.RiderID == ei.CurrentRegistration.RiderID));
               ei.CurrentRegistration = new RegistrationModel() { EventID = ei.ID, RiderID = ei.CurrentRegistration.RiderID };
             }
             if (Request.Form["newrider"] != null && Request.Form["newrider"] != "0")
@@ -90,16 +103,37 @@ namespace frecevents.web.Controllers
           Response.Redirect("/Home/Login?return=" + Request.Path);
         }
 
-        if(String.IsNullOrEmpty(id))
+        EventInfoModel eventinfo;
+        if (IsPostBack())
         {
-          return Redirect("/Home/index");
-        }
-        if(IsPostBack())
-        {
+          eventinfo = new EventInfoModel()
+          {
+            ID = Request.Form["ID"],
+            Description =  Request.Form["Description"],
+            EventSite = Request.Form["EventSite"],
+            EventType = Request.Form["EventType"],
+            SiteURL =  Request.Form["SiteURL"],
+            MapUrl = Request.Form["MapUrl"],
+            Notes = Request.Form["Notes"]
+          };
+          DateTime dateval;
+          if (!DateTime.TryParse(Request.Form["StartDateTime"], out dateval))
+          {
+            throw new Exception("Invalid date value passed for Start (" + Request.Form["StartDateTime"] + ")");
+          }
+          eventinfo.StartDateTime = dateval;
+          if (!DateTime.TryParse(Request.Form["EndDateTime"], out dateval))
+          {
+            throw new Exception("Invalid date value passed for End (" + Request.Form["EndDateTime"] + ")");
+          }
+          eventinfo.EndDateTime = dateval;
+          Root.Data.SaveEvent(eventinfo);
 
         }
-
-        var eventinfo = Root.Data.GetEvent(id);
+        else
+        {
+          eventinfo = String.IsNullOrWhiteSpace(id) ? new EventInfoModel() : Root.Data.GetEvent(id);
+        }
         eventinfo.Initialize();
         return View(eventinfo);
       }

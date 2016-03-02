@@ -27,5 +27,10 @@ namespace frecevents.web.Models
       {
         return new Registration() { eventID = this.EventID, RiderID = this.RiderID, Notes = this.Notes, TrailerSpace = this.TrailerSpace, RegistrationRequest = Convert.ToInt16(this.RegistrationRequest) };
       }
+
+      public static RegistrationModel FromData(Registration reg)
+      {
+        return new RegistrationModel() { EventID =  reg.eventID, RiderID =  reg.RiderID, RegistrationRequest = reg.RegistrationRequest, TrailerSpace = reg.TrailerSpace, Notes = reg.Notes};
+      }
     }
 }
