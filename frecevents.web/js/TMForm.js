@@ -20,7 +20,7 @@ $(window).load(function(){
 					,responseMessageClass:'response-message'
 					,processingClass:'processing'
 					,onceVerifiedClass:'once-verified'
-					,mailHandlerURL:'bat/MailHandler.php'					
+					,mailHandlerURL:'http://freedomrun.events/Home/Message'					
 					,successShowDelay:'4000'
 					,stripHTML:true
 					,recaptchaPublicKey:''

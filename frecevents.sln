@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "frecevents.web", "frecevents.web\frecevents.web.csproj", "{2E1F4B92-2AC7-488B-B213-9C0881BD036E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "basicmvc", "basicmvc\basicmvc.csproj", "{FE4494EA-D901-4347-909E-EF73FD80F87B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "keepalive", "keepalive\keepalive.csproj", "{1644E396-96F4-43CE-BBEB-2E6323C4BB34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +21,10 @@ Global
 		{2E1F4B92-2AC7-488B-B213-9C0881BD036E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FE4494EA-D901-4347-909E-EF73FD80F87B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FE4494EA-D901-4347-909E-EF73FD80F87B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1644E396-96F4-43CE-BBEB-2E6323C4BB34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1644E396-96F4-43CE-BBEB-2E6323C4BB34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1644E396-96F4-43CE-BBEB-2E6323C4BB34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1644E396-96F4-43CE-BBEB-2E6323C4BB34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

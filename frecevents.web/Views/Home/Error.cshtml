@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Error";
     Layout = "~/Views/Shared/_layout.cshtml";
 }
@@ -9,5 +8,57 @@
 
 <h3>Oops!</h3>
 <hr />
-We are so very sorry, but something has gone wrong.  Information about the error has been logged and someone will try to figure out what happened.
+<div class="container ">
+    <div class="row">
+        <div class="grid_12">
+            <p>We are so very sorry, but something has gone wrong.  Information about the error has been logged and someone will try to figure out what happened.</p>
+            <p>Alternatively, if you would like to leave a message about what you were trying to do, Todd or Belinda will take care of it for you:</p>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="grid_12">
+            <div class="grid_3">&nbsp;</div>
+            <div class="grid_6">
+                <div class="contact-block">
+                    <form id="contact-form" class='contact-form off1'>
+                        <input type="hidden" name="source" value="error" />
+                        <div class="contact-form-loader"></div>
+                        <fieldset>
+                            <label class="name">
+                                <input type="text" name="name" placeholder="Name (optional)" value="" />
+                            </label>
+                            <label class="email">
+                                <input type="text" name="email" placeholder="E-mail (optional)" value="" />
+                            </label>
+                            <label class="message">
+                                <textarea name="message" placeholder="Message"></textarea>
+                            </label>
+                            <div class="btn-wr">
+                                <a class="btn btn__mod" href="#" data-type="submit">send</a>
+                            </div>
+                        </fieldset>
+                        <div class="modal fade response-message">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-hidden="true">
+                                            &times;
+                                        </button>
+                                        <h4 class="modal-title">Error report</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        You message has been sent!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div><!--/grid-->
 
+        </div>
+    </div>
+</div>

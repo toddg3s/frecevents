@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using frecevents.web.Models;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Net.Mail;
 
 namespace frecevents.web.Controllers
 {
@@ -207,6 +208,28 @@ namespace frecevents.web.Controllers
     public ActionResult Error()
     {
       return View(ModelBase.Default);
+    }
+
+    public ActionResult Message()
+    {
+      var msg = new System.Net.Mail.MailMessage();
+      msg.To.Add("admin@freedomrun.events");
+      msg.From = new System.Net.Mail.MailAddress(
+        String.IsNullOrWhiteSpace(Request.Form["email"]) ? "admin@freedomrun.events" : Request.Form["email"]
+        );
+      switch(Request.Form["source"])
+      {
+        case "error":
+          msg.Subject = "Freedomrun.events Error report";
+          break;
+        default:
+          msg.Subject = "Freedomrun.events General Feedback";
+          break;
+      }
+      msg.Body = Request.Form["message"];
+      SmtpClient smtp = new SmtpClient();
+      smtp.Send(msg);
+      return Content("success");
     }
 
     private string GetDataValue(UploadSpec model, string[] data, string key)
