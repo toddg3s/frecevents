@@ -176,14 +176,14 @@
                                 traileroption = (reg.TrailerSpace > 0) ? "has room in a trailer for " : "needs room in a trailer for ", 
                                 trailerspace = Math.Abs(reg.TrailerSpace), 
                                 notes = reg.Notes, 
-                                request = (reg.RegistrationRequest < 3) ? "Please register for the event" : ""};
+                                request = (reg.RegistrationRequest < 3) ? "Please register me for the event" : "I will register myself"};
                     }
                     <div style="margin-bottom: 10px;">@trailermessage</div>
                     @foreach (var rider in riderlist)
                     {
                         <div>
-                            <div style="font-weight: bold">@rider.name</div>
-                            <div style="margin-left: 20px;">
+                            <div style="font-weight: bold; margin-top: 5px; margin-bottom: 0px;">@rider.name</div>
+                            <div style="margin-left: 20px; line-height: normal">
                                 @rider.traileroption @rider.trailerspace horse(s)<br/>
                                 @rider.request<br/>
                                 &quot;@rider.notes &quot;

@@ -8,35 +8,8 @@ namespace frecevents.web
 {
   public class LoginInfo
   {
-    private LoginType _userType;
-    private int _riderId;
-
-    public LoginType UserType
-    {
-      get
-      {
-        return _userType;
-      }
-      set
-      {
-        if (_userType == value) return;
-        _userType = value;
-        if (Changed != null) Changed(this, new EventArgs());
-      }
-    }
-    public int RiderID {
-      get 
-      {
-        return _riderId;
-      }
-
-      set 
-      {
-        if (_riderId == value) return;
-        _riderId = value;
-        if (Changed != null) Changed(this, new EventArgs());
-      }
-    }
+    public LoginType UserType { get; set; }
+    public int RiderID { get; set; }
 
     public static LoginInfo Parse(string logindata)
     {
@@ -61,8 +34,6 @@ namespace frecevents.web
       }
       return new LoginInfo() { UserType = lt, RiderID = riderid };
     }
-
-    public event EventHandler Changed;
 
     public override string ToString()
     {

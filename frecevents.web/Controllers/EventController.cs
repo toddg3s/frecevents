@@ -56,7 +56,9 @@ namespace frecevents.web.Controllers
             }
             if (Request.Form["newrider"] != null && Request.Form["newrider"] != "0")
             {
-              Root.Login.RiderID = Int32.Parse(Request.Form["newrider"]);
+              var login = Root.Login;
+              login.RiderID = Int32.Parse(Request.Form["newrider"]);
+              Root.Login = login;
               ei.CurrentRegistration = Root.Data.GetRegistration(ei.ID, Root.Login.RiderID) ??
                                        new RegistrationModel() { EventID = ei.ID, RiderID = Root.Login.RiderID };
             }

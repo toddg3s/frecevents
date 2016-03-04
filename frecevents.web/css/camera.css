@@ -4,7 +4,6 @@
 /*============  General Styles&Layout  ==================*/
 .camera_container {
   position: relative;
-  padding-bottom: 60%;
 }
 @media (max-width: 736px) {
   .camera_container {

@@ -24,19 +24,17 @@ namespace frecevents.web
       get { return _log ?? (_log = new Log4netLog()); }
     }
 
-    private static LoginInfo _login;
     public static LoginInfo Login
     {
       get
       {
-        if (_login != null) return _login;
-
         var logindata = HttpContext.Current.Session["logindata"];
+        LoginInfo login = null;
 
         if(logindata!=null)
         {
-          _login = LoginInfo.Parse(logindata.ToString());
-          return _login;
+          login = LoginInfo.Parse(logindata.ToString());
+          return login;
         }
 
         logindata = HttpContext.Current.Request.Cookies["logindata"];
@@ -44,26 +42,18 @@ namespace frecevents.web
         {
           var value = ((HttpCookie)logindata).Value;
           HttpContext.Current.Session["logindata"] = value;
-          _login = LoginInfo.Parse(value);
+          login = LoginInfo.Parse(value);
         }
-        if(_login!=null)
-        {
-          _login.Changed += (login, args) => SaveLogin(login.ToString());
-        }
-        return _login;
+
+        return login;
       }
       set
       {
-        if(_login !=null && (_login.UserType == value.UserType && _login.RiderID == value.RiderID))
-        {
-          return;
-        }
-        _login = value;
-        _login.Changed += (login, args) => SaveLogin(login.ToString());
-
-        SaveLogin(_login.ToString());
+        SaveLogin(value.ToString());
       }
     }
+
+
 
     private static void SaveLogin(string logindata)
     {
@@ -71,7 +61,7 @@ namespace frecevents.web
       if(HttpContext.Current.Request.Cookies["logindata"]!=null)
       {
         HttpContext.Current.Response.Cookies.Remove("logindata");
-        HttpContext.Current.Response.Cookies.Add(new HttpCookie("logindata", _login.ToString()) { Expires = System.DateTime.MaxValue });
+        HttpContext.Current.Response.Cookies.Add(new HttpCookie("logindata", logindata) { Expires = System.DateTime.MaxValue });
       }
     }
   }
