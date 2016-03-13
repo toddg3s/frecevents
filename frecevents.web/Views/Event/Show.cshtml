@@ -49,7 +49,8 @@
                                         <div>
                                             @{
                                             var name = (from r in Model.Riders where r.ID == Model.CurrentRegistration.RiderID select r.Name).FirstOrDefault();
-                                            var space = Math.Abs(Model.CurrentRegistration.TrailerSpace);
+                                            var tspace = Math.Abs(Model.CurrentRegistration.TrailerSpace);
+                                            var lspace = Math.Abs(Model.CurrentRegistration.LodgingSpace);
                                             if (Model.CurrentRegistration.Registered)
                                             {
                                                 message = name + " will be attending this event.";
@@ -65,25 +66,51 @@
                                             }
                                             <div>@message</div>
                                             <div style="font-size: smaller; line-height: normal">@instructions</div>
-                                            <div>
-                                                <select name="traileroption">
-                                                    <option value="1" @(Model.CurrentRegistration.TrailerSpace > 0 ? "selected" : "")>I have space in my trailer for</option>
-                                                    <option value="-1" @(Model.CurrentRegistration.TrailerSpace <= 0 ? "selected" : "")>I need space in a trailer for</option>
-                                                </select>
-                                                <select name="trailerspace">
-                                                    <option value="0" @(space == 0 ? "selected" : "")>0</option>
-                                                    <option value="1" @(space == 1 ? "selected" : "")>1</option>
-                                                    <option value="2" @(space == 2 ? "selected" : "")>2</option>
-                                                    <option value="3" @(space == 3 ? "selected" : "")>3</option>
-                                                    <option value="4" @(space == 4 ? "selected" : "")>4</option>
-                                                    <option value="5" @(space == 5 ? "selected" : "")>5</option>
-                                                    <option value="6" @(space == 6 ? "selected" : "")>6</option>
-                                                    <option value="7" @(space == 7 ? "selected" : "")>7</option>
-                                                    <option value="8" @(space == 8 ? "selected" : "")>8</option>
-                                                    <option value="9" @(space == 9 ? "selected" : "")>9</option>
-                                                </select>
-                                                horse(s)
-                                            </div>
+                                            @if (Model.Trailers)
+                                            {
+                                                <div>
+                                                    <select name="traileroption">
+                                                        <option value="1" @(Model.CurrentRegistration.TrailerSpace > 0 ? "selected" : "")>I have space in my trailer for</option>
+                                                        <option value="-1" @(Model.CurrentRegistration.TrailerSpace <= 0 ? "selected" : "")>I need space in a trailer for</option>
+                                                    </select>
+                                                    <select name="trailerspace">
+                                                        <option value="0" @(tspace == 0 ? "selected" : "")>0</option>
+                                                        <option value="1" @(tspace == 1 ? "selected" : "")>1</option>
+                                                        <option value="2" @(tspace == 2 ? "selected" : "")>2</option>
+                                                        <option value="3" @(tspace == 3 ? "selected" : "")>3</option>
+                                                        <option value="4" @(tspace == 4 ? "selected" : "")>4</option>
+                                                        <option value="5" @(tspace == 5 ? "selected" : "")>5</option>
+                                                        <option value="6" @(tspace == 6 ? "selected" : "")>6</option>
+                                                        <option value="7" @(tspace == 7 ? "selected" : "")>7</option>
+                                                        <option value="8" @(tspace == 8 ? "selected" : "")>8</option>
+                                                        <option value="9" @(tspace == 9 ? "selected" : "")>9</option>
+                                                    </select>
+                                                    horse(s)
+                                                </div>
+                                            }
+                                            @if (Model.Lodging)
+                                            {
+                                                <div>
+                                                    <select name="lodgingoption">
+                                                        <option value="1" @(Model.CurrentRegistration.LodgingSpace > 0 ? "selected" : "")>I have space in my hotel room for</option>
+                                                        <option value="-1" @(Model.CurrentRegistration.LodgingSpace <= 0 ? "selected" : "")>I need space in a hotel room for</option>
+                                                    </select>
+                                                    <select name="lodgingspace">
+                                                        <option value="0" @(lspace == 0 ? "selected" : "")>0</option>
+                                                        <option value="1" @(lspace == 1 ? "selected" : "")>1</option>
+                                                        <option value="2" @(lspace == 2 ? "selected" : "")>2</option>
+                                                        <option value="3" @(lspace == 3 ? "selected" : "")>3</option>
+                                                        <option value="4" @(lspace == 4 ? "selected" : "")>4</option>
+                                                        <option value="5" @(lspace == 5 ? "selected" : "")>5</option>
+                                                        <option value="6" @(lspace == 6 ? "selected" : "")>6</option>
+                                                        <option value="7" @(lspace == 7 ? "selected" : "")>7</option>
+                                                        <option value="8" @(lspace == 8 ? "selected" : "")>8</option>
+                                                        <option value="9" @(lspace == 9 ? "selected" : "")>9</option>
+                                                    </select>
+                                                    person(s)
+                                                </div>
+                                            }
+                                            <div>@Html.CheckBoxFor(model => model.CurrentRegistration.FoodVolunteer) I am willing to bring a food item for everyone</div>
                                             <div>Comment (short):<br/>
                                             @Html.TextAreaFor(model => model.CurrentRegistration.Notes)
                                             </div>
@@ -167,6 +194,17 @@
                         {
                             trailermessage = "We have space for " + Math.Abs(totalTrailerSpace) + " more horses in our trailers";
                         }
+
+                        var totalLodgingSpace = Model.Registrations.Sum(reg => reg.LodgingSpace);
+                        var lodgingmessage = "";
+                        if (totalLodgingSpace < 0)
+                        {
+                            lodgingmessage = "Overall, we NEED space for " + Math.Abs(totalLodgingSpace).ToString() + " people";
+                        }
+                        else
+                        {
+                            lodgingmessage = "We have space for " + Math.Abs(totalLodgingSpace).ToString() + " people";
+                        }
                         var riderlist =
                             from reg in Model.Registrations
                             join rdr in Model.Riders on reg.RiderID equals rdr.ID
@@ -175,18 +213,39 @@
                                 name = rdr.Name, 
                                 traileroption = (reg.TrailerSpace > 0) ? "has room in a trailer for " : "needs room in a trailer for ", 
                                 trailerspace = Math.Abs(reg.TrailerSpace), 
+                                lodgingoption = (reg.LodgingSpace > 0) ? "has room in a hotel for " : "needs room in a hotel for ", 
+                                lodgingspace = Math.Abs(reg.LodgingSpace), 
                                 notes = reg.Notes, 
+                                foodvolunteer = reg.FoodVolunteer,
                                 request = (reg.RegistrationRequest < 3) ? "Please register me for the event" : "I will register myself"};
                     }
-                    <div style="margin-bottom: 10px;">@trailermessage</div>
+                    @if (Model.Trailers)
+                    {
+                        <div style="margin-bottom: 10px;">@trailermessage</div>
+                    }
+                    @if (Model.Lodging)
+                    {
+                        <div style="margin-bottom: 10px;">@lodgingmessage</div>
+                    }
                     @foreach (var rider in riderlist)
                     {
                         <div>
                             <div style="font-weight: bold; margin-top: 5px; margin-bottom: 0px;">@rider.name</div>
                             <div style="margin-left: 20px; line-height: normal">
-                                @rider.traileroption @rider.trailerspace horse(s)<br/>
-                                @rider.request<br/>
-                                &quot;@rider.notes &quot;
+                                @if (Model.Trailers)
+                                {
+                                    <div>@rider.traileroption @rider.trailerspace horse(s)</div>
+                                }
+                                @if (Model.Trailers)
+                                {
+                                    <div>@rider.traileroption @rider.trailerspace horse(s)</div>
+                                }
+                                @if (@rider.foodvolunteer)
+                                {
+                                    <div>Willing to bring food item</div>
+                                }
+                                <div>@rider.request</div>
+                                <div>&quot;@rider.notes &quot;</div>
                             </div>
                         </div>
                     }

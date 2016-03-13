@@ -30,6 +30,8 @@ namespace frecevents.web
         public string SiteAddress { get; set; }
         public string MapURL { get; set; }
         public string Notes { get; set; }
+        public bool Trailers { get; set; }
+        public bool Lodging { get; set; }
     
         public virtual ICollection<Registration> Registrations { get; set; }
     }

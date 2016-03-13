@@ -15,6 +15,8 @@ namespace frecevents.web.Models
     public string SiteAddress { get; set; }
     public string MapUrl { get; set; }
     public string Notes { get; set; }
+    public bool Trailers { get; set; }
+    public bool Lodging { get; set; }
 
     public List<RegistrationModel> Registrations { get; set; }
     public RegistrationModel CurrentRegistration { get; set; }
@@ -75,8 +77,9 @@ namespace frecevents.web.Models
             SiteURL = SiteURL,
             Description = Description,
             Notes = Notes,
-            MapURL = MapUrl
-
+            MapURL = MapUrl,
+            Trailers = Trailers,
+            Lodging = Lodging
         };
     }
     public static EventInfoModel FromData(EventInfo ei)
@@ -95,7 +98,9 @@ namespace frecevents.web.Models
                          SiteURL = ei.SiteURL,
                          Description = ei.Description,
                          Notes = ei.Notes,
-                         MapUrl = ei.MapURL
+                         MapUrl = ei.MapURL,
+                         Trailers = ei.Trailers,
+                         Lodging = ei.Lodging
                      };
     }
   }

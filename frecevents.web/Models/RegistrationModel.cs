@@ -12,7 +12,9 @@ namespace frecevents.web.Models
       public int RiderID { get; set; }
       public string Notes { get; set; }
       public int TrailerSpace { get; set; }
+      public int LodgingSpace { get; set; }
       public int RegistrationRequest { get; set; }
+      public bool FoodVolunteer { get; set; }
       public bool Registered
       {
         get { return (RegistrationRequest > 0); }
@@ -25,12 +27,29 @@ namespace frecevents.web.Models
 
       public Registration ToData()
       {
-        return new Registration() { eventID = this.EventID, RiderID = this.RiderID, Notes = this.Notes, TrailerSpace = this.TrailerSpace, RegistrationRequest = Convert.ToInt16(this.RegistrationRequest) };
+        return new Registration() { 
+          eventID = this.EventID, 
+          RiderID = this.RiderID, 
+          Notes = this.Notes, 
+          TrailerSpace = this.TrailerSpace, 
+          LodingSpace = this.LodgingSpace,
+          RegistrationRequest = Convert.ToInt16(this.RegistrationRequest),
+          FoodVolunteer = this.FoodVolunteer
+        };
       }
 
       public static RegistrationModel FromData(Registration reg)
       {
-        return new RegistrationModel() { EventID =  reg.eventID, RiderID =  reg.RiderID, RegistrationRequest = reg.RegistrationRequest, TrailerSpace = reg.TrailerSpace, Notes = reg.Notes};
+        return new RegistrationModel()
+        {
+          EventID =  reg.eventID, 
+          RiderID =  reg.RiderID, 
+          RegistrationRequest = reg.RegistrationRequest, 
+          TrailerSpace = reg.TrailerSpace, 
+          LodgingSpace = reg.LodingSpace,
+          FoodVolunteer = reg.FoodVolunteer,
+          Notes = reg.Notes
+        };
       }
     }
 }

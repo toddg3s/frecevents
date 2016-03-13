@@ -20,6 +20,8 @@
           <Property Name="SiteAddress" Type="varchar" MaxLength="300" />
           <Property Name="MapURL" Type="varchar" MaxLength="300" />
           <Property Name="Notes" Type="varchar" MaxLength="4000" />
+          <Property Name="Trailers" Type="bit" Nullable="false" />
+          <Property Name="Lodging" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Registration">
           <Key>
@@ -31,6 +33,8 @@
           <Property Name="Notes" Type="varchar" MaxLength="4000" />
           <Property Name="TrailerSpace" Type="int" Nullable="false" />
           <Property Name="RegistrationRequest" Type="smallint" Nullable="false" />
+          <Property Name="LodingSpace" Type="int" Nullable="false" />
+          <Property Name="FoodVolunteer" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Rider">
           <Key>
@@ -120,6 +124,8 @@ warning 6002: The table/view 'graysoft_frecevents.freceventsweb.Event' does not 
           <Property Name="MapURL" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="Notes" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Registrations" Relationship="Self.FK_Registration_Event" FromRole="EventInfo" ToRole="Registration" />
+          <Property Name="Trailers" Type="Boolean" Nullable="false" />
+          <Property Name="Lodging" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Registration">
           <Key>
@@ -133,6 +139,8 @@ warning 6002: The table/view 'graysoft_frecevents.freceventsweb.Event' does not 
           <NavigationProperty Name="Rider" Relationship="Self.FK_Registration_Rider" FromRole="Registration" ToRole="Rider" />
           <Property Name="TrailerSpace" Type="Int32" Nullable="false" />
           <Property Name="RegistrationRequest" Type="Int16" Nullable="false" />
+          <Property Name="LodingSpace" Type="Int32" Nullable="false" />
+          <Property Name="FoodVolunteer" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Rider">
           <Key>
@@ -200,6 +208,8 @@ warning 6002: The table/view 'graysoft_frecevents.freceventsweb.Event' does not 
           <EntitySetMapping Name="EventInfoes">
             <EntityTypeMapping TypeName="freceventsModel.EventInfo">
               <MappingFragment StoreEntitySet="EventInfo">
+                <ScalarProperty Name="Lodging" ColumnName="Lodging" />
+                <ScalarProperty Name="Trailers" ColumnName="Trailers" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
@@ -217,6 +227,8 @@ warning 6002: The table/view 'graysoft_frecevents.freceventsweb.Event' does not 
           <EntitySetMapping Name="Registrations">
             <EntityTypeMapping TypeName="freceventsModel.Registration">
               <MappingFragment StoreEntitySet="Registration">
+                <ScalarProperty Name="FoodVolunteer" ColumnName="FoodVolunteer" />
+                <ScalarProperty Name="LodingSpace" ColumnName="LodingSpace" />
                 <ScalarProperty Name="RegistrationRequest" ColumnName="RegistrationRequest" />
                 <ScalarProperty Name="TrailerSpace" ColumnName="TrailerSpace" />
                 <ScalarProperty Name="eventID" ColumnName="eventID" />

@@ -18,8 +18,24 @@ namespace frecevents.web.Controllers
 
             if(Request.Form["action"]!=null)
             {
-              ei.CurrentRegistration.TrailerSpace = int.Parse(Request["traileroption"])*
-                                                    int.Parse(Request["trailerspace"]);
+              if (ei.Trailers)
+              {
+                ei.CurrentRegistration.TrailerSpace = int.Parse(Request["traileroption"])*
+                                                      int.Parse(Request["trailerspace"]);
+              }
+              else
+              {
+                ei.CurrentRegistration.TrailerSpace = 0;
+              }
+              if (ei.Lodging)
+              {
+                ei.CurrentRegistration.LodgingSpace = int.Parse(Request["lodgingoption"])*
+                                                      int.Parse(Request["lodingspace"]);
+              }
+              else
+              {
+                ei.CurrentRegistration.LodgingSpace = 0;
+              }
               ei.CurrentRegistration.Notes = Request.Form["CurrentRegistration.Notes"];
               if (Request.Form["CurrentRegistration.Request"] != null && 
                 Request.Form["CurrentRegistration.Request"].Equals("true", StringComparison.InvariantCultureIgnoreCase))
