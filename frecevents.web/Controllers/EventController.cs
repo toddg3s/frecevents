@@ -30,15 +30,16 @@ namespace frecevents.web.Controllers
               if (ei.Lodging)
               {
                 ei.CurrentRegistration.LodgingSpace = int.Parse(Request["lodgingoption"])*
-                                                      int.Parse(Request["lodingspace"]);
+                                                      int.Parse(Request["lodgingspace"]);
               }
               else
               {
                 ei.CurrentRegistration.LodgingSpace = 0;
               }
+              ei.CurrentRegistration.FoodVolunteer = Request.Form["CurrentRegistration.FoodVolunteer"].Check2Bool();
               ei.CurrentRegistration.Notes = Request.Form["CurrentRegistration.Notes"];
               if (Request.Form["CurrentRegistration.Request"] != null && 
-                Request.Form["CurrentRegistration.Request"].Equals("true", StringComparison.InvariantCultureIgnoreCase))
+                Request.Form["CurrentRegistration.Request"].Check2Bool())
               {
                 if (ei.CurrentRegistration.RegistrationRequest != 2)
                 {
@@ -127,12 +128,15 @@ namespace frecevents.web.Controllers
           eventinfo = new EventInfoModel()
           {
             ID = Request.Form["ID"],
+            Title = Request.Form["Title"],
             Description =  Request.Form["Description"],
             EventSite = Request.Form["EventSite"],
             EventType = Request.Form["EventType"],
             SiteURL =  Request.Form["SiteURL"],
             MapUrl = Request.Form["MapUrl"],
-            Notes = Request.Form["Notes"]
+            Notes = Request.Form["Notes"],
+            Trailers = Request.Form["Trailers"].Check2Bool(),
+            Lodging = Request.Form["Lodging"].Check2Bool()
           };
           DateTime dateval;
           if (!DateTime.TryParse(Request.Form["StartDateTime"], out dateval))

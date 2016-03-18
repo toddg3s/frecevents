@@ -37,6 +37,7 @@ namespace frecevents.web.Controllers
         switch(value)
         {
           case "moreleg":
+          case "kickon":
             lt = LoginType.Member;
             break;
           case "heelsdown":

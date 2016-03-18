@@ -232,20 +232,23 @@
                         <div>
                             <div style="font-weight: bold; margin-top: 5px; margin-bottom: 0px;">@rider.name</div>
                             <div style="margin-left: 20px; line-height: normal">
-                                @if (Model.Trailers)
+                                @if (Model.Trailers && rider.trailerspace != 0)
                                 {
                                     <div>@rider.traileroption @rider.trailerspace horse(s)</div>
                                 }
-                                @if (Model.Trailers)
+                                @if (Model.Lodging && rider.lodgingspace != 0)
                                 {
-                                    <div>@rider.traileroption @rider.trailerspace horse(s)</div>
+                                    <div>@rider.lodgingoption @rider.lodgingspace people</div>
                                 }
                                 @if (@rider.foodvolunteer)
                                 {
                                     <div>Willing to bring food item</div>
                                 }
                                 <div>@rider.request</div>
-                                <div>&quot;@rider.notes &quot;</div>
+                                @if(!String.IsNullOrWhiteSpace(rider.notes))
+                                {                                    
+                                    <div>&quot;@rider.notes &quot;</div>
+                                }
                             </div>
                         </div>
                     }

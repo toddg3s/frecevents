@@ -13,7 +13,7 @@ namespace frecevents.web.Models
       public string Notes { get; set; }
       public int TrailerSpace { get; set; }
       public int LodgingSpace { get; set; }
-      public int RegistrationRequest { get; set; }
+      public Int16 RegistrationRequest { get; set; }
       public bool FoodVolunteer { get; set; }
       public bool Registered
       {

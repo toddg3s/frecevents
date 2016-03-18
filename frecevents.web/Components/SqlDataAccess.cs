@@ -2,6 +2,7 @@
 using frecevents.web.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
@@ -65,7 +66,20 @@ namespace frecevents.web.Components
 
       var original = Context.EventInfoes.Find(Event.ID);
       Context.Entry(original).CurrentValues.SetValues(Event);
-      Context.SaveChanges();
+      try
+      {
+        Context.SaveChanges();
+      }
+      catch(DbEntityValidationException dbvex)
+      {
+        var msgs = String.Join("|", dbvex.EntityValidationErrors.Select(eve => 
+          String.Join(",", eve.ValidationErrors.Select(ve => ve.ErrorMessage + "(" + ve.PropertyName + ")"))));
+        Root.Log.Error(dbvex, "Error while saving event {0}: {1}", Event.ID, msgs);
+      }
+      catch(Exception ex)
+      {
+        Root.Log.Error(ex, "General error while saving event {0}", Event.ID);
+      }
     }
 
     public void DeleteEvent(string ID)
@@ -77,7 +91,7 @@ namespace frecevents.web.Components
     {
       var reg = Context.Registrations.Find(EventID, RiderID);
       if (reg == null) return null;
-      return new RegistrationModel() { EventID = reg.eventID, RiderID = reg.RiderID, TrailerSpace = reg.TrailerSpace, Notes = reg.Notes, RegistrationRequest = reg.RegistrationRequest };
+      return new RegistrationModel() { EventID = reg.eventID, RiderID = reg.RiderID, TrailerSpace = reg.TrailerSpace, Notes = reg.Notes, FoodVolunteer = reg.FoodVolunteer, RegistrationRequest = reg.RegistrationRequest };
     }
 
     public void Register(Models.RegistrationModel reg)
