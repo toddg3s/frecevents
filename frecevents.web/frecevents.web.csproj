@@ -278,6 +278,7 @@
     <Compile Include="Components\SqlDataAccess.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RiderController.cs" />
     <Compile Include="Event.cs">
       <DependentUpon>freceventData.tt</DependentUpon>
     </Compile>
@@ -336,6 +337,7 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Event\Edit.cshtml" />
     <Content Include="Views\Event\List.cshtml" />
+    <Content Include="Views\Rider\index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

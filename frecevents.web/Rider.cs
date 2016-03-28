@@ -23,6 +23,10 @@ namespace frecevents.web
         public string Name { get; set; }
         public string Email { get; set; }
         public string Notes { get; set; }
+        public int Trailerspace { get; set; }
+        public bool FoodVolunteer { get; set; }
+        public short RegistrationRequest { get; set; }
+        public int Lodgingspace { get; set; }
     
         public virtual ICollection<Registration> Registrations { get; set; }
     }

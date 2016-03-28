@@ -44,6 +44,10 @@
           <Property Name="Name" Type="varchar" MaxLength="300" />
           <Property Name="Email" Type="varchar" MaxLength="300" />
           <Property Name="Notes" Type="varchar" MaxLength="4000" />
+          <Property Name="Trailerspace" Type="int" Nullable="false" />
+          <Property Name="FoodVolunteer" Type="bit" Nullable="false" />
+          <Property Name="RegistrationRequest" Type="smallint" Nullable="false" />
+          <Property Name="Lodgingspace" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'graysoft_frecevents.freceventsweb.Event' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -151,6 +155,10 @@ warning 6002: The table/view 'graysoft_frecevents.freceventsweb.Event' does not 
           <Property Name="Email" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="Notes" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Registrations" Relationship="Self.FK_Registration_Rider" FromRole="Rider" ToRole="Registration" />
+          <Property Name="Trailerspace" Type="Int32" Nullable="false" />
+          <Property Name="FoodVolunteer" Type="Boolean" Nullable="false" />
+          <Property Name="RegistrationRequest" Type="Int16" Nullable="false" />
+          <Property Name="Lodgingspace" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Event">
           <Key>
@@ -240,6 +248,10 @@ warning 6002: The table/view 'graysoft_frecevents.freceventsweb.Event' does not 
           <EntitySetMapping Name="Riders">
             <EntityTypeMapping TypeName="freceventsModel.Rider">
               <MappingFragment StoreEntitySet="Rider">
+                <ScalarProperty Name="Lodgingspace" ColumnName="Lodgingspace" />
+                <ScalarProperty Name="RegistrationRequest" ColumnName="RegistrationRequest" />
+                <ScalarProperty Name="FoodVolunteer" ColumnName="FoodVolunteer" />
+                <ScalarProperty Name="Trailerspace" ColumnName="Trailerspace" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
