@@ -39,7 +39,7 @@ namespace frecevents.web.Models
       }
     }
 
-    public virtual void Initialize()
+    public virtual ModelBase Initialize()
     {
       var elist = GetEvents();
       PastEvents.Clear();
@@ -83,6 +83,7 @@ namespace frecevents.web.Models
         Riders = Root.Data.GetRiders();
         Root.Cache.Set("riderlist", Riders);
       }
+      return this;
     }
 
     protected List<EventModel> GetEvents()

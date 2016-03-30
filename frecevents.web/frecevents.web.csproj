@@ -338,6 +338,8 @@
     <Content Include="Views\Event\Edit.cshtml" />
     <Content Include="Views\Event\List.cshtml" />
     <Content Include="Views\Rider\index.cshtml" />
+    <Content Include="Views\Rider\edit.cshtml" />
+    <Content Include="Views\Rider\RiderNotFound.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

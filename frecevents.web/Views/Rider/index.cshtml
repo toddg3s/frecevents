@@ -1,8 +1,37 @@
-﻿
+﻿@model frecevents.web.Models.ModelBase
 @{
-    ViewBag.Title = "index";
+    ViewBag.Title = "Rider List";
     Layout = "~/Views/Shared/_layout.cshtml";
 }
 
-<h2>index</h2>
+<div class="header-parall" data-stellar-background-ratio="0.8">
+</div>
+<div style="display: block; height: 60px;"></div>
+
+<div class="bg-secondary2 bg-pl">
+    <div class="container cont-1">
+        <div class="row">
+            <div class="grid_12">
+                @Html.ActionLink("Add a new rider", "edit", new { id = 0})
+                <br/>
+                <table border="0" style="width: 100%">
+                    <tr style="font-weight: bold">
+                        <td>Name</td>
+                        <td>Email</td>
+                    </tr>
+                    @foreach (var rider in Model.Riders)
+                    {
+                        <tr>
+                            <td>
+                                @Html.ActionLink(rider.Name, "edit", new { id = rider.ID})
+                            </td>
+                            <td>@rider.Email</td>
+                        </tr>
+                    }
+                </table>
+                @Html.ActionLink("Add a new rider", "edit", new { id = 0})
+            </div>
+        </div>
+    </div>
+</div>
 

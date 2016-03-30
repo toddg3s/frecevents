@@ -38,18 +38,6 @@ namespace frecevents.web.Controllers
               }
               ei.CurrentRegistration.FoodVolunteer = Request.Form["CurrentRegistration.FoodVolunteer"].Check2Bool();
               ei.CurrentRegistration.Notes = Request.Form["CurrentRegistration.Notes"];
-              if (Request.Form["CurrentRegistration.Request"] != null && 
-                Request.Form["CurrentRegistration.Request"].Check2Bool())
-              {
-                if (ei.CurrentRegistration.RegistrationRequest != 2)
-                {
-                  ei.CurrentRegistration.RegistrationRequest = 1;
-                }
-              }
-              else
-              {
-                ei.CurrentRegistration.RegistrationRequest = 3;
-              }
               Root.Data.Register(ei.CurrentRegistration);
               var reg =
                 ei.Registrations.FirstOrDefault(
@@ -62,7 +50,6 @@ namespace frecevents.web.Controllers
               {
                 reg.TrailerSpace = ei.CurrentRegistration.TrailerSpace;
                 reg.Notes = ei.CurrentRegistration.Notes;
-                reg.RegistrationRequest = ei.CurrentRegistration.RegistrationRequest;
               }
             }
             if(Request.Form["unregister"]!=null)
@@ -80,12 +67,12 @@ namespace frecevents.web.Controllers
                                        new RegistrationModel() { EventID = ei.ID, RiderID = Root.Login.RiderID };
             }
           }
-          else
+          else  // IsPostBack
           {
             ei = Root.Data.GetEvent(id);
             if (ei == null)
             {
-              return View("EventNotFound", ModelBase.Default);
+              return View("EventNotFound", new ModelBase().Initialize());
             }
             ei.Initialize();
 
@@ -105,14 +92,12 @@ namespace frecevents.web.Controllers
 
       public ActionResult Upcoming()
       {
-        var mb = new ModelBase();
-        mb.Initialize();
-        return View(mb);
+        return View(new ModelBase().Initialize());
       }
 
       public ActionResult List(string type)
       {
-        return View(ModelBase.Default);
+        return View(new ModelBase().Initialize());
       }
 
       public ActionResult Edit(string id)
@@ -158,6 +143,20 @@ namespace frecevents.web.Controllers
         }
         eventinfo.Initialize();
         return View(eventinfo);
+      }
+
+      public ActionResult Emails(string id)
+      {
+        var ei = Root.Data.GetEvent(id);
+        ei.Initialize();
+        if(ei==null)
+        {
+          return View("EventNotFound", ModelBase.Default);
+        }
+        var emails = (from reg in ei.Registrations
+                      join r in ei.Riders on reg.RiderID equals r.ID
+                      select r.Email).Distinct();
+        return Content(String.Join(";",emails));
       }
     }
 }

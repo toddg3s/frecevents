@@ -114,11 +114,6 @@
                                             <div>Comment (short):<br/>
                                             @Html.TextAreaFor(model => model.CurrentRegistration.Notes)
                                             </div>
-                                            <div>@Html.CheckBoxFor(model => model.CurrentRegistration.Request) Please register for this event on my behalf</div>
-                                            <div class="disclaimer">
-                                                This option is available only for riders that have given their registration information
-                                                (including payment information) to Freedom Run
-                                            </div>
                                             <input name="action" type="submit" value="@action" />
                                             @if (Model.CurrentRegistration.Registered)
                                             {
@@ -134,6 +129,7 @@
                                                 <option value="@rider.ID">@rider.Name</option>
                                             }
                                         </select>
+                                        @Html.ActionLink("Add a new rider", actionName: "edit", controllerName: "rider", routeValues: new { id=0, @return = Request.Path }, htmlAttributes: null)
                                     </div>
                                 }
                             </div>
@@ -188,22 +184,22 @@
                         var trailermessage = "";
                         if (totalTrailerSpace < 0)
                         {
-                            trailermessage = "Overall, we NEED space for " + Math.Abs(totalTrailerSpace).ToString() + " horses";
+                            trailermessage = "We NEED space in trailers for " + Math.Abs(totalTrailerSpace).ToString() + " horses";
                         }
                         else
                         {
-                            trailermessage = "We have space for " + Math.Abs(totalTrailerSpace) + " more horses in our trailers";
+                            trailermessage = "We have space in trailers for " + Math.Abs(totalTrailerSpace) + " more horses";
                         }
 
                         var totalLodgingSpace = Model.Registrations.Sum(reg => reg.LodgingSpace);
                         var lodgingmessage = "";
                         if (totalLodgingSpace < 0)
                         {
-                            lodgingmessage = "Overall, we NEED space for " + Math.Abs(totalLodgingSpace).ToString() + " people";
+                            lodgingmessage = "We NEED hotel space for " + Math.Abs(totalLodgingSpace).ToString() + " people";
                         }
                         else
                         {
-                            lodgingmessage = "We have space for " + Math.Abs(totalLodgingSpace).ToString() + " people";
+                            lodgingmessage = "We have hotel space for " + Math.Abs(totalLodgingSpace).ToString() + " people";
                         }
                         var riderlist =
                             from reg in Model.Registrations
@@ -216,8 +212,7 @@
                                 lodgingoption = (reg.LodgingSpace > 0) ? "has room in a hotel for " : "needs room in a hotel for ", 
                                 lodgingspace = Math.Abs(reg.LodgingSpace), 
                                 notes = reg.Notes, 
-                                foodvolunteer = reg.FoodVolunteer,
-                                request = (reg.RegistrationRequest < 3) ? "Please register me for the event" : "I will register myself"};
+                                foodvolunteer = reg.FoodVolunteer};
                     }
                     @if (Model.Trailers)
                     {
@@ -244,7 +239,6 @@
                                 {
                                     <div>Willing to bring food item</div>
                                 }
-                                <div>@rider.request</div>
                                 @if(!String.IsNullOrWhiteSpace(rider.notes))
                                 {                                    
                                     <div>&quot;@rider.notes &quot;</div>

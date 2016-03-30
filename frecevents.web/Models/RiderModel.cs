@@ -5,7 +5,7 @@ using System.Web;
 
 namespace frecevents.web.Models
 {
-  public class RiderModel
+  public class RiderModel : ModelBase
   {
     public int ID { get; set; }
     public string Name { get; set; }

@@ -18,6 +18,12 @@ namespace frecevents.web
                 url: "Event/upcoming",
                 defaults: new { controller = "Event", action = "upcoming" });
 
+            routes.MapRoute(
+                name: "Riders",
+                url: "riders",
+                defaults: new { controller = "Rider", action = "index" });
+
+
             routes.MapRoute(    
                 name: "EventDisplay",
                 url: "{id}",
