@@ -23,6 +23,11 @@ namespace frecevents.web
                 url: "riders",
                 defaults: new { controller = "Rider", action = "index" });
 
+            routes.MapRoute(
+                name: "Help",
+                url: "help",
+                defaults: new { controller = "Home", action = "Help" });
+
 
             routes.MapRoute(    
                 name: "EventDisplay",

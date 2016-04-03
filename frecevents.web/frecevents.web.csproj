@@ -154,6 +154,11 @@
     <Content Include="images\favicon.ico" />
     <Content Include="images\footer_bg.jpg" />
     <Content Include="images\form-loader.gif" />
+    <Content Include="images\help_eventlogin.png" />
+    <Content Include="images\help_login.png" />
+    <Content Include="images\help_select.png" />
+    <Content Include="images\help_signup.png" />
+    <Content Include="images\help_update.png" />
     <Content Include="images\ie8-panel\warning_bar_0000_us.jpg" />
     <Content Include="images\info_icon.png" />
     <Content Include="images\jumpingheader.jpg" />
@@ -276,6 +281,7 @@
     <Compile Include="Components\Extensions.cs" />
     <Compile Include="Components\Log4netLog.cs" />
     <Compile Include="Components\SqlDataAccess.cs" />
+    <Compile Include="Components\StaticDataAccess.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RiderController.cs" />
@@ -340,6 +346,7 @@
     <Content Include="Views\Rider\index.cshtml" />
     <Content Include="Views\Rider\edit.cshtml" />
     <Content Include="Views\Rider\RiderNotFound.cshtml" />
+    <Content Include="Views\Home\Help.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

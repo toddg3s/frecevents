@@ -10,6 +10,7 @@ namespace frecevents.web
     public static IDataAccess Data
     {
       get { return _data ?? (_data = new SqlDataAccess()); }
+//      get { return _data ?? (_data = new StaticDataAccess()); }
     }
 
     private static ICache _cache;

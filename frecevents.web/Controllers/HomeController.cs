@@ -233,6 +233,11 @@ namespace frecevents.web.Controllers
       return Content("success");
     }
 
+    public ActionResult Help()
+    {
+      return View(new ModelBase().Initialize());
+    }
+
     private string GetDataValue(UploadSpec model, string[] data, string key)
     {
       if (!model.Mapping.ContainsKey(key))
