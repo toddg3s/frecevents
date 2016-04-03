@@ -145,7 +145,7 @@ namespace frecevents.web.Controllers
         return View(eventinfo);
       }
 
-      public ActionResult Emails(string id)
+      public ActionResult Emails(string id, string type)
       {
         var ei = Root.Data.GetEvent(id);
         ei.Initialize();
@@ -153,9 +153,66 @@ namespace frecevents.web.Controllers
         {
           return View("EventNotFound", ModelBase.Default);
         }
-        var emails = (from reg in ei.Registrations
-                      join r in ei.Riders on reg.RiderID equals r.ID
-                      select r.Email).Distinct();
+        IEnumerable<string> emails;
+        
+        if(String.IsNullOrWhiteSpace(type))
+        {
+          emails = (from reg in ei.Registrations
+                    join r in ei.Riders on reg.RiderID equals r.ID
+                    select r.Email).Distinct();
+        }
+        else
+        {
+          switch(type.Trim().ToLower())
+          {
+            case "food":
+              emails = (from reg in ei.Registrations
+                        join r in ei.Riders on reg.RiderID equals r.ID
+                        where reg.FoodVolunteer
+                        select r.Email).Distinct();
+              break;
+            case "trailer":
+              emails = (from reg in ei.Registrations
+                        join r in ei.Riders on reg.RiderID equals r.ID
+                        where reg.TrailerSpace != 0
+                        select r.Email).Distinct();
+              break;
+            case "trailerneed":
+              emails = (from reg in ei.Registrations
+                        join r in ei.Riders on reg.RiderID equals r.ID
+                        where reg.TrailerSpace < 0
+                        select r.Email).Distinct();
+              break;
+            case "trailerhave":
+              emails = (from reg in ei.Registrations
+                        join r in ei.Riders on reg.RiderID equals r.ID
+                        where reg.TrailerSpace > 0
+                        select r.Email).Distinct();
+              break;
+            case "lodging":
+              emails = (from reg in ei.Registrations
+                        join r in ei.Riders on reg.RiderID equals r.ID
+                        where reg.LodgingSpace != 0
+                        select r.Email).Distinct();
+              break;
+            case "lodgingneed":
+              emails = (from reg in ei.Registrations
+                        join r in ei.Riders on reg.RiderID equals r.ID
+                        where reg.LodgingSpace < 0
+                        select r.Email).Distinct();
+              break;
+            case "lodginghave":
+              emails = (from reg in ei.Registrations
+                        join r in ei.Riders on reg.RiderID equals r.ID
+                        where reg.LodgingSpace > 0
+                        select r.Email).Distinct();
+              break;
+            default:
+              emails = new string[] { };
+              break;
+          }
+        }
+
         return Content(String.Join(";",emails));
       }
     }

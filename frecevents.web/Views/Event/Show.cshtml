@@ -265,3 +265,18 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "List")
 </p>
+@if (Root.Login != null && Root.Login.UserType == LoginType.Admin)
+{
+    <p class="markdown">Email Lists:<br/>
+    <ul>
+        <li>@Html.ActionLink("All riders", "Emails", routeValues: new { id = Model.ID })</li>
+        <li>@Html.ActionLink("Food volunteers", "Emails", routeValues: new { id = Model.ID, type="food" })</li>
+        <li>@Html.ActionLink("All Trailers", "Emails", routeValues: new { id = Model.ID, type="trailer" })</li>
+        <li>@Html.ActionLink("Needs space in a trailer", "Emails", routeValues: new { id = Model.ID, type = "trailerneed" })</li>
+        <li>@Html.ActionLink("Has space in a trailer", "Emails", routeValues: new { id = Model.ID, type = "trailerhave" })</li>
+        <li>@Html.ActionLink("All Lodging", "Emails", routeValues: new { id = Model.ID, type = "lodging" })</li>
+        <li>@Html.ActionLink("Needs space in a room", "Emails", routeValues: new { id = Model.ID, type = "lodgingneed" })</li>
+        <li>@Html.ActionLink("Has space in a room", "Emails", routeValues: new { id = Model.ID, type = "lodginghave" })</li>
+    </ul>
+    </p>
+}
