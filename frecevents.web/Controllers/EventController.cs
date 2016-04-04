@@ -38,6 +38,7 @@ namespace frecevents.web.Controllers
               }
               ei.CurrentRegistration.FoodVolunteer = Request.Form["CurrentRegistration.FoodVolunteer"].Check2Bool();
               ei.CurrentRegistration.Notes = Request.Form["CurrentRegistration.Notes"];
+              ei.CurrentRegistration.RegistrationRequest = 1;
               Root.Data.Register(ei.CurrentRegistration);
               var reg =
                 ei.Registrations.FirstOrDefault(
