@@ -39,13 +39,85 @@
                             </div>
                         </div>
 
+                        <div>Unless I specify differently when signing up for an event, use these options:</div>
+                        @{
+                            int tspace = Math.Abs(Model.Trailerspace);
+                            int lspace = Math.Abs(Model.Lodgingspace);
+                        }
+                        <div>
+                            <select name="traileroption">
+                                <option value="1" @(Model.Trailerspace > 0 ? "selected" : "")>I have space in my trailer for</option>
+                                <option value="-1" @(Model.Trailerspace <= 0 ? "selected" : "")>I need space in a trailer for</option>
+                            </select>
+                            <select name="trailerspace">
+                                <option value="0" @(tspace == 0 ? "selected" : "")>0</option>
+                                <option value="1" @(tspace == 1 ? "selected" : "")>1</option>
+                                <option value="2" @(tspace == 2 ? "selected" : "")>2</option>
+                                <option value="3" @(tspace == 3 ? "selected" : "")>3</option>
+                                <option value="4" @(tspace == 4 ? "selected" : "")>4</option>
+                                <option value="5" @(tspace == 5 ? "selected" : "")>5</option>
+                                <option value="6" @(tspace == 6 ? "selected" : "")>6</option>
+                                <option value="7" @(tspace == 7 ? "selected" : "")>7</option>
+                                <option value="8" @(tspace == 8 ? "selected" : "")>8</option>
+                                <option value="9" @(tspace == 9 ? "selected" : "")>9</option>
+                            </select>
+                            horse(s)
+                        </div>
+                        <div>
+                            <select name="lodgingoption">
+                                <option value="1" @(Model.Lodgingspace > 0 ? "selected" : "")>I have space in my hotel room for</option>
+                                <option value="-1" @(Model.Lodgingspace <= 0 ? "selected" : "")>I need space in a hotel room for</option>
+                            </select>
+                            <select name="lodgingspace">
+                                <option value="0" @(lspace == 0 ? "selected" : "")>0</option>
+                                <option value="1" @(lspace == 1 ? "selected" : "")>1</option>
+                                <option value="2" @(lspace == 2 ? "selected" : "")>2</option>
+                                <option value="3" @(lspace == 3 ? "selected" : "")>3</option>
+                                <option value="4" @(lspace == 4 ? "selected" : "")>4</option>
+                                <option value="5" @(lspace == 5 ? "selected" : "")>5</option>
+                                <option value="6" @(lspace == 6 ? "selected" : "")>6</option>
+                                <option value="7" @(lspace == 7 ? "selected" : "")>7</option>
+                                <option value="8" @(lspace == 8 ? "selected" : "")>8</option>
+                                <option value="9" @(lspace == 9 ? "selected" : "")>9</option>
+                            </select>
+                            person(s)
+                        </div>
+                        <div>@Html.CheckBoxFor(model => model.FoodVolunteer) I am willing to bring a food item for everyone</div>
+
+
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
                                 <input type="submit" value="Save" class="btn btn-default" />
                             </div>
                         </div>
                     </div>
+                    <hr/>
+                    <h4>Multiple Event sign-ups:</h4>
+                    <div>New signups will use the default options above.  You can visit the event page to change them, if you want.</div>
+                    <input type="hidden" name="multireg" value="true" />
+                    <table border="0">
+                        <tr style="line-height: normal; font-weight:bold"><td style="text-align: center; width: 70px;">I'm<br/>Going!</td><td><br/>Date</td><td><br/>Event</td></tr>
+                        @foreach(var reg in Model.Registrations)
+                        {
+                            <tr>
+                                @{
+                                    var ev = Model.AllEvents.Where(e => e.ID == reg.EventID).FirstOrDefault() ?? 
+                                        new frecevents.web.Models.EventModel() { Title = "Unknown" };
+                                }
+                                <td style="text-align: center">@Html.CheckBox("selevent_" + ev.ID, reg.Registered)<input type="hidden" name="currevent_@ev.ID" value="@reg.Registered" /></td>
+                                <td>@ev.FormatDateRange(frecevents.web.Models.EventModel.DateFormat.List)</td>
+                                <td>@Html.ActionLink(ev.Title, "", ev.ID)</td>
+                            </tr>
+                        }
+                    </table>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+
                 }
+
             </div>
         </div>
     </div>

@@ -138,5 +138,11 @@ namespace frecevents.web.Components
       if (reg == null) return;
       ev.Registrations.Remove(reg);
     }
+
+
+    public List<Models.RegistrationModel> GetRiderRegistrations(int RiderID, bool UpcomingOnly)
+    {
+      return new List<Models.RegistrationModel>();
+    }
   }
 }

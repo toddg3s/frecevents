@@ -165,5 +165,20 @@ namespace frecevents.web.Components
       Context.SaveChanges();
       Rider.ID = datarider.ID;
     }
+
+
+    public List<RegistrationModel> GetRiderRegistrations(int RiderID, bool UpcomingOnly)
+    {
+      var list = new List<RegistrationModel>();
+      if (RiderID <= 0) return list;
+
+      Context.Registrations
+        .Where(r => r.RiderID == RiderID)
+        .OrderBy(r => r.EventInfo.StartDateTime)
+        .ToList()
+        .ForEach(r => list.Add(RegistrationModel.FromData(r)));
+
+      return list;
+    }
   }
 }

@@ -23,5 +23,6 @@ namespace frecevents.web.Interfaces
     Models.RegistrationModel GetRegistration(string EventID, int RiderID);
     void Register(Models.RegistrationModel reg);
     void Unregister(string EventID, int RiderID);
+    List<Models.RegistrationModel> GetRiderRegistrations(int RiderID, bool UpcomingOnly);
   }
 }
