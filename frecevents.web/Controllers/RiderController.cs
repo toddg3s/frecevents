@@ -85,7 +85,6 @@ namespace frecevents.web.Controllers
       else
       {
         var rider = Root.Data.GetRider(id);
-        rider.Initialize();
         if (rider == null)
         {
           if (id != 0)
@@ -97,6 +96,7 @@ namespace frecevents.web.Controllers
             rider = new RiderModel();
           }
         }
+        rider.Initialize();
         return View(rider);
       }
     }

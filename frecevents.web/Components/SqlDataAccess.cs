@@ -154,12 +154,12 @@ namespace frecevents.web.Components
         Context.SaveChanges();
         return;
       }
-      var foundrider = FindRider(Rider.Name, Rider.Email);
-      if (foundrider != null)
-      {
-        Rider.ID = foundrider.ID;
-        SaveRider(Rider);
-      }
+      //var foundrider = FindRider(Rider.Name, Rider.Email);
+      //if (foundrider != null)
+      //{
+      //  Rider.ID = foundrider.ID;
+      //  SaveRider(Rider);
+      //}
       var datarider = Rider.ToData();
       Context.Riders.Add(datarider);
       Context.SaveChanges();
