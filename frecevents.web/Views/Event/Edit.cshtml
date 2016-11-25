@@ -45,6 +45,7 @@
                         @Html.LabelFor(model => model.StartDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
                             @Html.TextBoxFor(model => model.StartDateTime, htmlAttributes: new { style="width: 200px;"})
+                            <img src="~/Scripts/images2/cal.gif" alt="Date Time Picker" onclick="javascript: NewCssCal('StartDateTime', 'MMddyyyy', 'dropdown', true, '12', true)" />
                             @Html.ValidationMessageFor(model => model.StartDateTime, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -53,6 +54,7 @@
                         @Html.LabelFor(model => model.EndDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
                             @Html.TextBoxFor(model => model.EndDateTime, htmlAttributes: new { style="width: 200px;"})
+                            <img src="~/Scripts/images2/cal.gif" alt="Date Time Picker" onclick="javascript: NewCssCal('EndDateTime', 'MMddyyyy', 'dropdown', true, '12', true)" />
                             @Html.ValidationMessageFor(model => model.EndDateTime, "", new { @class = "text-danger" })
                         </div>
                     </div>

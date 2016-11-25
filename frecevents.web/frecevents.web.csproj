@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -262,6 +263,15 @@
     <Content Include="js\TMForm.js" />
     <Content Include="js\tmstickup.js" />
     <Content Include="js\wow\wow.js" />
+    <Content Include="Scripts\datetimepicker_css.js" />
+    <Content Include="Scripts\images2\cal.gif" />
+    <Content Include="Scripts\images2\cal_close.gif" />
+    <Content Include="Scripts\images2\cal_fastforward.gif" />
+    <Content Include="Scripts\images2\cal_fastreverse.gif" />
+    <Content Include="Scripts\images2\cal_forward.gif" />
+    <Content Include="Scripts\images2\cal_minus.gif" />
+    <Content Include="Scripts\images2\cal_plus.gif" />
+    <Content Include="Scripts\images2\cal_reverse.gif" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
