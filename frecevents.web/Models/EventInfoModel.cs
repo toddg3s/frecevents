@@ -103,5 +103,31 @@ namespace frecevents.web.Models
                          Lodging = ei.Lodging
                      };
     }
+
+    public static EventInfoModel FromCalEvent(Google.Apis.Calendar.v3.Data.Event calevent)
+    {
+      return new EventInfoModel()
+      {
+        ID = calevent.Id,
+        Title = calevent.Summary,
+        StartDateTime = calevent.Start.DateTime ?? DateTime.Parse(calevent.Start.Date),
+        EndDateTime = calevent.End.DateTime ?? DateTime.Parse(calevent.End.Date),
+        Description = calevent.Description,
+        SiteAddress = calevent.Location,
+        Trailers = false,
+        Lodging = false,
+        Registrations = new List<RegistrationModel>()
+      };
+    }
+
+
+    public void UpdateFromCalEvent(Google.Apis.Calendar.v3.Data.Event calevent)
+    {
+      Title = calevent.Summary;
+      StartDateTime = calevent.Start.DateTime ?? DateTime.Parse(calevent.Start.Date);
+      EndDateTime = calevent.End.DateTime ?? DateTime.Parse(calevent.End.Date);
+      Description = calevent.Description;
+      SiteAddress = calevent.Location;  
+    }
   }
 }

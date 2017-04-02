@@ -30,7 +30,7 @@ namespace frecevents.web.Models
     {
       get
       {
-        if(s_default==null)
+        if (s_default == null)
         {
           s_default = new ModelBase();
           s_default.Initialize();
@@ -78,7 +78,7 @@ namespace frecevents.web.Models
       }
 
       Riders = Root.Cache.Get("riderlist") as List<RiderModel>;
-      if(Riders==null)
+      if (Riders == null)
       {
         Riders = Root.Data.GetRiders();
         Root.Cache.Set("riderlist", Riders);
@@ -91,8 +91,25 @@ namespace frecevents.web.Models
       var list = Root.Cache.Get("eventlist") as List<EventModel>;
       if (list == null)
       {
-          list = Root.Data.GetEvents();
-          Root.Cache.Set("eventlist", list);
+        list = Root.Data.GetEvents();
+        var cal = Calendar.GetEvents();
+        foreach(var calevent in cal)
+        {
+          var ev = list.FirstOrDefault(e => e.ID == calevent.Id);
+          if(ev==null)
+          {
+            var newev = EventInfoModel.FromCalEvent(calevent);
+            Root.Data.SaveEvent(newev);
+            list.Add(newev);
+          }
+          else
+          {
+            ev.Title = calevent.Summary;
+            ev.StartDateTime = calevent.Start.DateTime ?? DateTime.Parse(calevent.Start.Date);
+            ev.EndDateTime = calevent.End.DateTime ?? DateTime.Parse(calevent.End.Date);
+          }
+        }
+        Root.Cache.Set("eventlist", list);
       }
       return list;
     }

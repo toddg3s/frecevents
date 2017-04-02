@@ -14,6 +14,7 @@ namespace frecevents.web
       AreaRegistration.RegisterAllAreas();
       RegisterGlobalFilters(GlobalFilters.Filters);
       RouteConfig.RegisterRoutes(RouteTable.Routes);
+      Utilities.keypath = Server.MapPath("FRECEvents-9cc942ea3e7c.p12");
     }
 
     public static void RegisterGlobalFilters(GlobalFilterCollection filters)

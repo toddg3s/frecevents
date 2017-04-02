@@ -74,6 +74,8 @@ namespace frecevents.web.Controllers
           return View("EventNotFound", new ModelBase().Initialize());
         }
         ei.Initialize();
+        var calevent = Calendar.GetEvent(id);
+        ei.UpdateFromCalEvent(calevent);
 
         if (Root.Login != null && Root.Login.RiderID != 0)
         {

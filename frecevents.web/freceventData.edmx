@@ -116,7 +116,7 @@ warning 6002: The table/view 'graysoft_frecevents.freceventsweb.Event' does not 
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Title" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EndDateTime" Type="DateTime" Nullable="false" Precision="3" />
@@ -136,7 +136,7 @@ warning 6002: The table/view 'graysoft_frecevents.freceventsweb.Event' does not 
             <PropertyRef Name="eventID" />
             <PropertyRef Name="RiderID" />
           </Key>
-          <Property Name="eventID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="eventID" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="RiderID" Type="Int32" Nullable="false" />
           <Property Name="Notes" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="EventInfo" Relationship="Self.FK_Registration_Event" FromRole="Registration" ToRole="EventInfo" />
@@ -164,7 +164,7 @@ warning 6002: The table/view 'graysoft_frecevents.freceventsweb.Event' does not 
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Title" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EndDateTime" Type="DateTime" Nullable="false" Precision="3" />
